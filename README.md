@@ -8,6 +8,16 @@ Personal portfolio built with Next.js (App Router) and Tailwind. Migrated from a
 - Sections: Home, Professional, Skills, Projects, Extracurriculars, Books, Music, Contact
 - Smooth in-page navigation and responsive layout
 
+### Ask Tejas (AI Chatbot)
+- Floating chat widget that answers questions about the portfolio (projects, books, skills, experience, extracurriculars)
+- Uses Google Gemini via a Next.js API route with live DOM context collection so updates to the site are reflected immediately
+- Server route with safe fallbacks and model compatibility attempts (2.0 and 1.5 flash families)
+
+Files:
+- `src/components/AskTejas.tsx` – client chat UI, collects live content from the page
+- `src/app/api/ask/route.ts` – server route calling Gemini REST (`generateContent`)
+- `src/data/portfolio.ts` – structured fallback context (projects, books, profile)
+
 ### Tech
 - Next.js 16 (App Router, TypeScript)
 - Tailwind (via `@tailwindcss/postcss`)
@@ -24,6 +34,13 @@ npm run dev
 # open http://localhost:3000
 ```
 
+### Environment Variables
+Create `./.env.local` (not committed) and set:
+```
+GEMINI_API_KEY=your_google_gemini_key
+```
+On Vercel (or your host), add the same variable in Project → Settings → Environment Variables.
+
 ### Build
 ```bash
 npm run build
@@ -38,3 +55,4 @@ npm start
 ### Notes
 - Local video has been removed; hero uses Vimeo embeds.
 - Navbar is normalized across sections so all links work everywhere.
+- Chatbot gracefully degrades to rule-based answers if no `GEMINI_API_KEY` is configured.
