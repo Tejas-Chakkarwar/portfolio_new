@@ -25,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-PC5SW294RY`}
           strategy="afterInteractive"
@@ -33,15 +35,13 @@ export default function RootLayout({
         <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag(){window.dataLayer.push(arguments);} 
             gtag('js', new Date());
-            gtag('config', 'G-PC5SW294RY');
+            gtag('config', 'G-PC5SW294RY', {
+              page_path: window.location.pathname,
+            });
           `}
         </Script>
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
         {children}
       </body>
     </html>
