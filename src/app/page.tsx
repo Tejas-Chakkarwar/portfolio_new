@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [selectedProfile, setSelectedProfile] = useState<string>("1"); // 1=Recruiter, 2=Developer, 3=Stalker, 4=Adventurer
+  const [liveAgentImageIndex, setLiveAgentImageIndex] = useState<number>(0);
+  const [stockMarketImageIndex, setStockMarketImageIndex] = useState<number>(0);
+  
+  const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
+  const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
   
   const getProfileImage = () => {
     switch(selectedProfile) {
@@ -141,6 +146,22 @@ export default function Home() {
       window.removeEventListener("scroll", onScroll);
       modalClickHandlers.forEach(([handler, modal]) => modal.removeEventListener("click", handler as EventListener));
     };
+  }, []);
+
+  // Auto-slide images for LiveAgent project
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveAgentImageIndex((prev) => (prev + 1) % liveAgentImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-slide images for StockMarket project
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStockMarketImageIndex((prev) => (prev + 1) % stockMarketImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -439,6 +460,78 @@ export default function Home() {
 
         <div className="projects-container">
           <div className="project-grid">
+            <div className="project-card" onClick={() => window.open('https://github.com/YashKhairnar/gemini_hackathon', '_blank')}>
+              <div className="project-image sliding-image" key={`liveagent-${liveAgentImageIndex}`} style={{ backgroundImage: `url('${liveAgentImages[liveAgentImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">LiveAgent</h3>
+                  <a href="https://github.com/YashKhairnar/gemini_hackathon" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                    <span>⭐</span> GitHub
+                  </a>
+                </div>
+                <div className="project-tech">
+                  <span className="tech-tag">CrewAI</span>
+                  <span className="tech-tag">Python</span>
+                  <span className="tech-tag">React</span>
+                  <span className="tech-tag">TypeScript</span>
+                  <span className="tech-tag">Flask</span>
+                  <span className="tech-tag">Automerge</span>
+                  <span className="tech-tag">WebSocket</span>
+                </div>
+                <p className="project-description">
+                  A powerful multi-agent AI system that transforms your ideas into fully functional applications in minutes. LiveAgent uses CrewAI to orchestrate multiple specialized AI agents that collaboratively generate, test, and validate code for both frontend and backend components.
+                </p>
+                <ul className="project-highlights">
+                  <li>Multi-Agent Code Generation: AI agents collaborate to generate production-ready code</li>
+                  <li>Integrated IDE: Built-in code editor with file management and terminal support</li>
+                  <li>Real-time Collaboration: Automerge-powered sync for collaborative editing</li>
+                  <li>Full-Stack Support: Generates both frontend (React/TypeScript) and backend code</li>
+                  <li>Progress Tracking: Real-time monitoring of code generation progress</li>
+                  <li>Specialized Agents: Orchestrator, Frontend, Backend, and QA agents work together</li>
+                </ul>
+                <div className="project-stats">
+                  <span className="stat-badge"><strong>Type:</strong> Multi-Agent AI System</span>
+                  <span className="stat-badge"><strong>Architecture:</strong> Frontend + Agent Backend + IDE Backend</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/Stock-Market-Tracker', '_blank')}>
+              <div className="project-image sliding-image" key={`stockmarket-${stockMarketImageIndex}`} style={{ backgroundImage: `url('${stockMarketImages[stockMarketImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">Stock Market Indices Tracker</h3>
+                  <a href="https://github.com/Tejas-Chakkarwar/Stock-Market-Tracker" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                    <span>⭐</span> GitHub
+                  </a>
+                </div>
+                <div className="project-tech">
+                  <span className="tech-tag">Spring Boot</span>
+                  <span className="tech-tag">Java 21</span>
+                  <span className="tech-tag">Next.js</span>
+                  <span className="tech-tag">TypeScript</span>
+                  <span className="tech-tag">Redis</span>
+                  <span className="tech-tag">Recharts</span>
+                  <span className="tech-tag">Tailwind CSS</span>
+                </div>
+                <p className="project-description">
+                  A full-stack web application for tracking real-time stock market indices with historical data visualization. Built with Spring Boot backend and Next.js frontend, this application efficiently manages API rate limits through intelligent caching strategies.
+                </p>
+                <ul className="project-highlights">
+                  <li>Real-time Index Tracking: Monitor live prices for SPY (S&P 500), DIA (Dow Jones), QQQ (NASDAQ-100), and IWM (Russell 2000)</li>
+                  <li>30-Day Price History: Interactive charts showing historical price trends using Recharts</li>
+                  <li>Auto-refresh: Index prices update automatically every 90 seconds</li>
+                  <li>Rate Limit Management: Visual display of API usage with monthly and per-minute tracking</li>
+                  <li>Intelligent Caching: Redis caching with custom TTL strategies reduces API calls while maintaining data freshness</li>
+                  <li>Rate Limiting: Enforces 20 requests/minute and 500 requests/month limits</li>
+                </ul>
+                <div className="project-stats">
+                  <span className="stat-badge"><strong>Live Demo:</strong> <a href="https://stock-market-tracker-eosin.vercel.app" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#C0392B', textDecoration: 'underline' }}>View Demo</a></span>
+                  <span className="stat-badge"><strong>Stack:</strong> Spring Boot + Next.js + Redis</span>
+                </div>
+              </div>
+            </div>
+
             <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/CuriosityAI', '_blank')}>
               <div className="project-image" style={{ backgroundImage: "url('/images/CuriosityAI.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               <div className="project-content">

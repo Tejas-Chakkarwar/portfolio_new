@@ -153,6 +153,21 @@ nav.scrolled { background-color: #141414; }
 .project-card { background: #1a1a1a; border-radius: 12px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; border: 2px solid transparent; }
 .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(192, 57, 43, 0.4); border-color: #C0392B; }
 .project-image { width: 100%; height: 280px; background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%); display: flex; align-items: center; justify-content: center; font-size: 80px; color: #fff; position: relative; overflow: hidden; }
+.project-image.sliding-image { 
+  background-size: cover; 
+  background-position: center;
+  animation: imageSlideFade 0.8s ease-in-out;
+}
+@keyframes imageSlideFade {
+  0% { 
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% { 
+    opacity: 1;
+    filter: blur(0);
+  }
+}
 .project-content { padding: 30px; }
 .project-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
 .project-title { font-size: 26px; font-weight: bold; color: #fff; margin-bottom: 10px; }
