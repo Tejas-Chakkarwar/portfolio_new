@@ -6,9 +6,11 @@ export default function Home() {
   const [selectedProfile, setSelectedProfile] = useState<string>("1"); // 1=Recruiter, 2=Developer, 3=Stalker, 4=Adventurer
   const [liveAgentImageIndex, setLiveAgentImageIndex] = useState<number>(0);
   const [stockMarketImageIndex, setStockMarketImageIndex] = useState<number>(0);
+  const [codeMedicImageIndex, setCodeMedicImageIndex] = useState<number>(0);
   
   const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
   const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
+  const codeMedicImages = ["/images/CodeMedic1.png", "/images/CodeMedic2.png", "/images/CodeMedic3.png"];
   
   const getProfileImage = () => {
     switch(selectedProfile) {
@@ -160,6 +162,14 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setStockMarketImageIndex((prev) => (prev + 1) % stockMarketImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-slide images for CodeMedic project
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCodeMedicImageIndex((prev) => (prev + 1) % codeMedicImages.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -460,12 +470,49 @@ export default function Home() {
 
         <div className="projects-container">
           <div className="project-grid">
-            <div className="project-card" onClick={() => window.open('https://github.com/YashKhairnar/gemini_hackathon', '_blank')}>
+            <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/CodeMedic', '_blank')}>
+              <div className="project-image sliding-image" key={`codemedic-${codeMedicImageIndex}`} style={{ backgroundImage: `url('${codeMedicImages[codeMedicImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">CodeMedic</h3>
+                  <a href="https://github.com/Tejas-Chakkarwar/CodeMedic" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                    <span>⭐</span> GitHub
+                  </a>
+                </div>
+                <div className="project-tech">
+                  <span className="tech-tag">Python</span>
+                  <span className="tech-tag">LangGraph</span>
+                  <span className="tech-tag">Google Gemini</span>
+                  <span className="tech-tag">Streamlit</span>
+                  <span className="tech-tag">Sentry API</span>
+                  <span className="tech-tag">GitHub API</span>
+                  <span className="tech-tag">Daytona</span>
+                  <span className="tech-tag">browser_use</span>
+                </div>
+                <p className="project-description">
+                  An AI-powered automated bug fixing agent that analyzes Sentry errors, identifies problematic code, proposes fixes, tests them in a sandbox environment, and creates draft pull requests.
+                </p>
+                <ul className="project-highlights">
+                  <li>Smart Error Analysis: Automatically analyzes Sentry error data including stack traces, error messages, and metadata</li>
+                  <li>AI-Powered File Discovery: Uses browser_use to intelligently navigate GitHub repositories and identify problematic files</li>
+                  <li>Intelligent Fix Generation: Leverages Google Gemini 2.5 Flash to propose comprehensive fixes with explanations</li>
+                  <li>Sandbox Testing: Tests fixes in isolated Daytona sandboxes before deployment</li>
+                  <li>Automated PR Creation: Creates draft pull requests with detailed descriptions</li>
+                  <li>Streamlit UI: User-friendly web interface for monitoring and controlling the bug fixing process</li>
+                </ul>
+                <div className="project-stats">
+                  <span className="stat-badge"><strong>Type:</strong> AI Agent + Automation</span>
+                  <span className="stat-badge"><strong>Hackathon:</strong> Daytona HackSprint</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/LiveAgent', '_blank')}>
               <div className="project-image sliding-image" key={`liveagent-${liveAgentImageIndex}`} style={{ backgroundImage: `url('${liveAgentImages[liveAgentImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               <div className="project-content">
                 <div className="project-header">
                   <h3 className="project-title">LiveAgent</h3>
-                  <a href="https://github.com/YashKhairnar/gemini_hackathon" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                  <a href="https://github.com/Tejas-Chakkarwar/LiveAgent" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
                     <span>⭐</span> GitHub
                   </a>
                 </div>
