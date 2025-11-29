@@ -7,10 +7,12 @@ export default function Home() {
   const [liveAgentImageIndex, setLiveAgentImageIndex] = useState<number>(0);
   const [stockMarketImageIndex, setStockMarketImageIndex] = useState<number>(0);
   const [codeMedicImageIndex, setCodeMedicImageIndex] = useState<number>(0);
+  const [sentinelImageIndex, setSentinelImageIndex] = useState<number>(0);
   
   const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
   const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
   const codeMedicImages = ["/images/CodeMedic1.png", "/images/CodeMedic2.png", "/images/CodeMedic3.png"];
+  const sentinelImages = ["/images/sentinel 1.png", "/images/sentinel 2.png", "/images/sentinel 3.png", "/images/sentinel 4.png", "/images/sentinel 5.png", "/images/sentinel 6.png"];
   
   const getProfileImage = () => {
     switch(selectedProfile) {
@@ -170,6 +172,14 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCodeMedicImageIndex((prev) => (prev + 1) % codeMedicImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-slide images for Sentinel project
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSentinelImageIndex((prev) => (prev + 1) % sentinelImages.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -470,6 +480,47 @@ export default function Home() {
 
         <div className="projects-container">
           <div className="project-grid">
+            <div className="project-card" onClick={() => window.open('https://github.com/Kushagrabainsla/sentinel', '_blank')}>
+              <div className="project-image sliding-image" key={`sentinel-${sentinelImageIndex}`} style={{ backgroundImage: `url('${sentinelImages[sentinelImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">Sentinel</h3>
+                  <a href="https://github.com/Kushagrabainsla/sentinel" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                    <span>⭐</span> GitHub
+                  </a>
+                </div>
+                <div className="project-tech">
+                  <span className="tech-tag">AWS Lambda</span>
+                  <span className="tech-tag">DynamoDB</span>
+                  <span className="tech-tag">SQS</span>
+                  <span className="tech-tag">SES</span>
+                  <span className="tech-tag">API Gateway</span>
+                  <span className="tech-tag">Terraform</span>
+                  <span className="tech-tag">Python 3.12</span>
+                  <span className="tech-tag">Next.js 16</span>
+                  <span className="tech-tag">TypeScript</span>
+                  <span className="tech-tag">React 19</span>
+                  <span className="tech-tag">Tailwind CSS</span>
+                  <span className="tech-tag">Google Gemini</span>
+                </div>
+                <p className="project-description">
+                  A production-ready, cloud-native email marketing platform built from scratch to solve scalability and reliability challenges. Fully serverless SaaS application that processes over 12,500 emails per minute and automatically scales based on demand.
+                </p>
+                <ul className="project-highlights">
+                  <li>AI-Powered Automation: Generate complete email campaigns from prompts using Google Gemini with actionable performance insights</li>
+                  <li>Advanced Analytics Dashboard: Temporal patterns, device/browser/OS distribution, geographic insights, and link performance tracking</li>
+                  <li>Enterprise-Grade Reliability: 12.5x throughput improvement through Lambda concurrency optimization, exponential backoff with jitter</li>
+                  <li>Multi-Region Deployment: DynamoDB Global Tables replicate data across US, Europe, and Asia-Pacific regions in real-time</li>
+                  <li>Security First: HTML content sanitization prevents XSS attacks, URL validation blocks malicious links, API key authentication</li>
+                  <li>Event-Driven Architecture: Real-time event tracking for opens, clicks, bounces with asynchronous DynamoDB writes</li>
+                </ul>
+                <div className="project-stats">
+                  <span className="stat-badge"><strong>Live Platform:</strong> <a href="https://dashboard.thesentinel.site/" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#C0392B', textDecoration: 'underline' }}>Try It Now</a></span>
+                  <span className="stat-badge"><strong>Performance:</strong> 12,500 emails/min • 99.9% uptime • &lt;200ms API response</span>
+                </div>
+              </div>
+            </div>
+
             <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/CodeMedic', '_blank')}>
               <div className="project-image sliding-image" key={`codemedic-${codeMedicImageIndex}`} style={{ backgroundImage: `url('${codeMedicImages[codeMedicImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               <div className="project-content">
