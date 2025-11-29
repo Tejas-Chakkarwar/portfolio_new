@@ -485,9 +485,14 @@ export default function Home() {
               <div className="project-content">
                 <div className="project-header">
                   <h3 className="project-title">Sentinel</h3>
-                  <a href="https://github.com/Kushagrabainsla/sentinel" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
-                    <span>⭐</span> GitHub
-                  </a>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <a href="https://dashboard.thesentinel.site/" target="_blank" className="live-link" onClick={(e) => { e.stopPropagation(); }}>
+                      <span>🚀</span> Live Platform
+                    </a>
+                    <a href="https://github.com/Kushagrabainsla/sentinel" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                      <span>⭐</span> GitHub
+                    </a>
+                  </div>
                 </div>
                 <div className="project-tech">
                   <span className="tech-tag">AWS Lambda</span>
@@ -515,7 +520,6 @@ export default function Home() {
                   <li>Event-Driven Architecture: Real-time event tracking for opens, clicks, bounces with asynchronous DynamoDB writes</li>
                 </ul>
                 <div className="project-stats">
-                  <span className="stat-badge"><strong>Live Platform:</strong> <a href="https://dashboard.thesentinel.site/" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#C0392B', textDecoration: 'underline' }}>Try It Now</a></span>
                   <span className="stat-badge"><strong>Performance:</strong> 12,500 emails/min • 99.9% uptime • &lt;200ms API response</span>
                 </div>
               </div>
@@ -599,9 +603,14 @@ export default function Home() {
               <div className="project-content">
                 <div className="project-header">
                   <h3 className="project-title">Stock Market Indices Tracker</h3>
-                  <a href="https://github.com/Tejas-Chakkarwar/Stock-Market-Tracker" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
-                    <span>⭐</span> GitHub
-                  </a>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <a href="https://stock-market-tracker-eosin.vercel.app" target="_blank" className="live-link" onClick={(e) => { e.stopPropagation(); }}>
+                      <span>🚀</span> Live Demo
+                    </a>
+                    <a href="https://github.com/Tejas-Chakkarwar/Stock-Market-Tracker" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                      <span>⭐</span> GitHub
+                    </a>
+                  </div>
                 </div>
                 <div className="project-tech">
                   <span className="tech-tag">Spring Boot</span>
@@ -624,7 +633,6 @@ export default function Home() {
                   <li>Rate Limiting: Enforces 20 requests/minute and 500 requests/month limits</li>
                 </ul>
                 <div className="project-stats">
-                  <span className="stat-badge"><strong>Live Demo:</strong> <a href="https://stock-market-tracker-eosin.vercel.app" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#C0392B', textDecoration: 'underline' }}>View Demo</a></span>
                   <span className="stat-badge"><strong>Stack:</strong> Spring Boot + Next.js + Redis</span>
                 </div>
               </div>
