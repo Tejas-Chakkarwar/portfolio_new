@@ -250,7 +250,7 @@ export default function Home() {
             <p className="hero-subtitle">Master's Student @ San Jose State University</p>
             <p>Dynamic and results-driven Software Engineer with 2+ years in full-stack development across high-impact, large-scale applications. Expertise in Java, Spring Boot, React, AWS, and microservices architecture.</p>
             <div className="hero-buttons">
-              <button className="btn btn-play" onClick={() => window.open('https://drive.google.com/file/d/1kTszx2r988BjyoIQ5txwcfuydju_hIJz/view?usp=sharing', '_blank')}>▶ Resume</button>
+              <button className="btn btn-play" onClick={() => window.open('https://drive.google.com/file/d/1jWksrlAyTxYiz-_XS9tGmnFPoy7IsO7j/view?usp=sharing', '_blank')}>▶ Resume</button>
               <button className="btn btn-info" onClick={() => window.open('https://linkedin.com/in/tejaschakkarwar', '_blank')}>ⓘ LinkedIn</button>
             </div>
           </div>
