@@ -227,10 +227,18 @@ export default function Home() {
         </nav>
 
         <div className="hero">
-          {(selectedProfile === "1" || selectedProfile === "3") ? (
+          {selectedProfile === "1" ? (
             <iframe 
               className="hero-video" 
               src="https://player.vimeo.com/video/1133031009?autoplay=1&loop=1&muted=1&background=1&controls=0&playsinline=1" 
+              frameBorder="0" 
+              allow="autoplay; fullscreen; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          ) : selectedProfile === "3" ? (
+            <iframe 
+              className="hero-video" 
+              src="https://www.loom.com/embed/4426d7d3c25945e499d47abdd8296a50?autoplay=true&loop=true&muted=true&t=99" 
               frameBorder="0" 
               allow="autoplay; fullscreen; picture-in-picture" 
               allowFullScreen
