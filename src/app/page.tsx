@@ -8,11 +8,13 @@ export default function Home() {
   const [stockMarketImageIndex, setStockMarketImageIndex] = useState<number>(0);
   const [codeMedicImageIndex, setCodeMedicImageIndex] = useState<number>(0);
   const [sentinelImageIndex, setSentinelImageIndex] = useState<number>(0);
+  const [thinkFlowImageIndex, setThinkFlowImageIndex] = useState<number>(0);
   
   const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
   const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
   const codeMedicImages = ["/images/CodeMedic1.png", "/images/CodeMedic2.png", "/images/CodeMedic3.png"];
   const sentinelImages = ["/images/sentinel 1.png", "/images/sentinel 2.png", "/images/sentinel 3.png", "/images/sentinel 4.png", "/images/sentinel 5.png", "/images/sentinel 6.png"];
+  const thinkFlowImages = ["/images/ThinkFlow1.png", "/images/ThinkFlow2.png", "/images/ThinkFlow3.png"];
   
   const getProfileImage = () => {
     switch(selectedProfile) {
@@ -180,6 +182,14 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setSentinelImageIndex((prev) => (prev + 1) % sentinelImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-slide images for ThinkFlow project
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setThinkFlowImageIndex((prev) => (prev + 1) % thinkFlowImages.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -488,6 +498,46 @@ export default function Home() {
 
         <div className="projects-container">
           <div className="project-grid">
+            <div className="project-card" onClick={() => window.open('https://github.com/YashKhairnar/ThinkFlow', '_blank')}>
+              <div className="project-image sliding-image" key={`thinkflow-${thinkFlowImageIndex}`} style={{ backgroundImage: `url('${thinkFlowImages[thinkFlowImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">ThinkFlow</h3>
+                  <a href="https://github.com/YashKhairnar/ThinkFlow" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                    <span>⭐</span> GitHub
+                  </a>
+                </div>
+                <div className="project-tech">
+                  <span className="tech-tag">PyTorch</span>
+                  <span className="tech-tag">VQ-VAE</span>
+                  <span className="tech-tag">BART</span>
+                  <span className="tech-tag">LSTM</span>
+                  <span className="tech-tag">Transformer</span>
+                  <span className="tech-tag">Flask</span>
+                  <span className="tech-tag">Next.js</span>
+                  <span className="tech-tag">TypeScript</span>
+                  <span className="tech-tag">TailwindCSS</span>
+                  <span className="tech-tag">Framer Motion</span>
+                  <span className="tech-tag">Hugging Face</span>
+                </div>
+                <p className="project-description">
+                  An advanced deep learning system that decodes raw EEG (electroencephalography) signals into coherent natural language text. The project implements and compares two state-of-the-art neural architectures for brain-computer interface applications, showcasing expertise in both modern Transformer-based models and classical sequence-to-sequence approaches.
+                </p>
+                <ul className="project-highlights">
+                  <li><strong>Transformer-Based Model (VQ-VAE + BART):</strong> Custom CNN encoder with 6 stacked Conv1D layers processing 105-channel EEG signals (5,500 timesteps), 8-head self-attention for long-range dependencies, Vector Quantization with 2,048-embedding codebook creating a "brain vocabulary" of 57 discrete tokens, and pretrained BART transformer for cross-modal translation</li>
+                  <li><strong>LSTM Sequence-to-Sequence Model:</strong> Bidirectional 2-layer LSTM encoder with optional channel reduction (105→32), Bahdanau attention mechanism, 2-layer unidirectional LSTM decoder with attention-augmented inputs, ~15M trainable parameters optimized for EEG-to-text translation</li>
+                  <li><strong>Dual Model Comparison:</strong> Side-by-side interface allowing users to compare Transformer vs LSTM performance on identical EEG inputs with real-time processing</li>
+                  <li><strong>Interactive Visualization:</strong> Animated waveform displays, raw tensor data viewer with modal interface, color-coded output comparisons (generated vs expected)</li>
+                  <li><strong>Advanced Features:</strong> Custom straight-through estimator for gradient flow through discrete codebook, configurable teacher forcing (0.5 ratio), Word Error Rate (WER) and word accuracy metrics, model performance metrics with confidence scores</li>
+                  <li><strong>Modern UI/UX:</strong> Glassmorphism design with neural grid background effects, Framer Motion animations, responsive layout optimized for desktop and mobile</li>
+                </ul>
+                <div className="project-stats">
+                  <span className="stat-badge"><strong>Type:</strong> Deep Learning + Brain-Computer Interface</span>
+                  <span className="stat-badge"><strong>Architecture:</strong> VQ-VAE + BART & LSTM Seq2Seq</span>
+                </div>
+              </div>
+            </div>
+
             <div className="project-card" onClick={() => window.open('https://github.com/Kushagrabainsla/sentinel', '_blank')}>
               <div className="project-image sliding-image" key={`sentinel-${sentinelImageIndex}`} style={{ backgroundImage: `url('${sentinelImages[sentinelImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               <div className="project-content">
