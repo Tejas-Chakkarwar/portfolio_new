@@ -996,7 +996,7 @@ export default function Home() {
               </div>
             </div>
 
-        <div className="project-card">
+        <div className="project-card" id="sentinelExtras">
           <div className="project-content">
             <div className="project-header">
               <h3 className="project-title">⚡ Performance Optimizations</h3>
@@ -1734,9 +1734,14 @@ export default function Home() {
     <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
       <h1>🚀 Featured Project - Sentinel</h1>
       <p>Serverless, event-driven email marketing platform with real-time analytics and multi-region resilience.</p>
-      <button className="btn btn-info" style={{ marginTop: '12px' }} onClick={() => document.getElementById('sentinelArchitecture')?.scrollIntoView({ behavior: 'smooth' })}>
-        View Architecture
-      </button>
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '12px' }}>
+        <button className="btn btn-info" onClick={() => document.getElementById('sentinelArchitecture')?.scrollIntoView({ behavior: 'smooth' })}>
+          View Architecture
+        </button>
+        <button className="btn btn-play" onClick={() => document.getElementById('sentinelExtras')?.scrollIntoView({ behavior: 'smooth' })}>
+          View Performance / IaC / Observability
+        </button>
+      </div>
     </div>
     <div className="projects-container" style={{ paddingTop: '0px' }}>
       <div className="project-grid">
