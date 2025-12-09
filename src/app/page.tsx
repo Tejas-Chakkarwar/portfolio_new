@@ -1664,6 +1664,10 @@ export default function Home() {
               <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div className="projects-page" id="featuredSentinelPage">
     <button className="back-button" onClick={showBrowsePage}>← Back to Home</button>
