@@ -1698,7 +1698,15 @@ export default function Home() {
     <div className="projects-container" style={{ paddingTop: '0px' }}>
       <div className="project-grid">
         <div className="project-card" id="sentinelArchitecture" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
-          <div className="project-image sliding-image" style={{ backgroundImage: "url('/images/sentinel 2.png')", backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '320px' }}></div>
+          <div
+            className="project-image sliding-image"
+            style={{
+              backgroundImage: `url('${sentinelImages[sentinelImageIndex]}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              minHeight: '320px'
+            }}
+          ></div>
           <div className="project-content">
             <div className="project-header">
               <h3 className="project-title">Sentinel</h3>
