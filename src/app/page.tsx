@@ -1756,16 +1756,182 @@ export default function Home() {
             <div className="project-header">
               <h3 className="project-title">🏗️ Architecture Highlights</h3>
             </div>
-            <div className="project-description" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="project-description" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <div style={{ width: '100%', textAlign: 'center' }}>
                 <img src="/images/sentinel-architecture-diagram.png" alt="Sentinel architecture diagram" style={{ width: '100%', maxHeight: '420px', objectFit: 'contain' }} />
               </div>
-              <ul className="project-highlights">
-                <li>Event-driven with SQS decoupling email send workers from campaign management</li>
-                <li>DynamoDB + GSIs for efficient patterns: campaigns by owner, events by campaign, link mappings by campaign+recipient</li>
-                <li>Lambda concurrency control: <code>maximum_concurrency = 2</code> for send_worker to respect SES rate limits (≈14 emails/sec)</li>
-                <li>Multi-region deployment with DynamoDB Global Tables for active-active durability and low-latency reads</li>
-              </ul>
+
+              <div className="project-highlights" style={{ display: 'grid', gap: '16px' }}>
+                <div>
+                  <h4>1) Lambda Function Structure</h4>
+                  <p className="project-description">Environment wiring for campaigns, segments, events, and queue targets.</p>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px' }}>
+{`# infra/modules/lambdas/main.tf
+resource "aws_lambda_function" "start_campaign" {
+  function_name    = "\${var.name}-start-campaign"
+  role             = var.roles.lambda_exec
+  handler          = local.lambda_handler
+  runtime          = local.lambda_runtime
+  filename         = "\${path.module}/.artifacts/start_campaign.zip"
+  source_code_hash = filebase64sha256("\${path.module}/.artifacts/start_campaign.zip")
+  timeout          = local.timeout_long
+  environment {
+    variables = {
+      DYNAMODB_CAMPAIGNS_TABLE    = var.dynamodb_campaigns_table
+      DYNAMODB_SEGMENTS_TABLE     = var.dynamodb_segments_table
+      DYNAMODB_EVENTS_TABLE       = var.dynamodb_events_table
+      SEND_QUEUE_URL              = var.queues.send_queue_url
+      AB_TEST_ANALYZER_LAMBDA_ARN = aws_lambda_function.ab_test_analyzer.arn
+      EVENTBRIDGE_ROLE_ARN        = var.scheduler_invoke_role_arn
+    }
+  }
+}`}
+                  </pre>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px', marginTop: '8px' }}>
+{`# services/send_worker/handler.py
+def lambda_handler(event, _context):
+    # Triggered by SQS event. Each record has:
+    # {"campaign_id":123, "recipient_id":456, "email":"user@example.com"}
+    for rec in event.get("Records", []):
+        body = json.loads(rec["body"])
+        campaign_id = body["campaign_id"]
+        recipient_id = body["recipient_id"]
+        email = body["email"]
+        variation_id = body.get("variation_id")
+        # Process email sending logic...`}
+                  </pre>
+                </div>
+
+                <div>
+                  <h4>2) SQS Message Processing</h4>
+                  <p className="project-description">Concurrency-capped worker and SQS fan-out respecting SES limits (≈14 emails/sec).</p>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px' }}>
+{`# infra/modules/lambdas/main.tf
+resource "aws_lambda_event_source_mapping" "send_worker_sqs" {
+  event_source_arn = var.queues.send_queue_arn
+  function_name    = aws_lambda_function.send_worker.arn
+  batch_size       = local.ses_batch_size
+  maximum_batching_window_in_seconds = local.ses_batching_window_seconds
+  # Throughput = ses_max_concurrency × ses_batch_size = 2 × 7 = 14 emails/sec
+  scaling_config {
+    maximum_concurrency = local.ses_max_concurrency
+  }
+}`}
+                  </pre>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px', marginTop: '8px' }}>
+{`# services/start_campaign/handler.py
+# Fan out to SQS in batches of up to 10 messages
+for batch in _chunks(contacts, 10):
+    entries = []
+    for c in batch:
+        message_body = {
+            "campaign_id": campaign_id,
+            "recipient_id": c["id"],
+            "email": c["email"],
+            "template_data": {
+                "subject": campaign.get("email_subject", campaign.get("subject", "")),
+                "html_body": campaign.get("email_body", campaign.get("html_body", "")),
+                "from_email": campaign.get("from_email", "noreply@thesentinel.site"),
+                "from_name": campaign.get("from_name", "Sentinel")
+            }
+        }
+        entries.append({"Id": str(c["id"]), "MessageBody": json.dumps(message_body)})
+    sqs.send_message_batch(QueueUrl=SQS_URL, Entries=entries)`}
+                  </pre>
+                </div>
+
+                <div>
+                  <h4>3) DynamoDB Schema Design</h4>
+                  <p className="project-description">GSIs for owner, campaign, and recipient lookups; TTL for link cleanup.</p>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px' }}>
+{`# infra/modules/dynamodb/main.tf (selected)
+resource "aws_dynamodb_table" "users" {
+  name = "\${var.name}-users"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key = "id"
+  attribute { name = "id" type = "S" }
+  attribute { name = "email" type = "S" }
+  attribute { name = "api_key" type = "S" }
+  global_secondary_index { name = "email_index"   hash_key = "email"   projection_type = "ALL" }
+  global_secondary_index { name = "api_key_index" hash_key = "api_key" projection_type = "ALL" }
+}
+
+resource "aws_dynamodb_table" "campaigns" {
+  name = "\${var.name}-campaigns"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key = "id"
+  attribute { name = "id" type = "S" }
+  attribute { name = "owner_id" type = "S" }
+  global_secondary_index { name = "owner_index" hash_key = "owner_id" projection_type = "ALL" }
+}
+
+resource "aws_dynamodb_table" "events" {
+  name = "\${var.name}-events"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key = "id"
+  attribute { name = "id" type = "S" }
+  attribute { name = "campaign_id" type = "S" }
+  global_secondary_index { name = "campaign_index" hash_key = "campaign_id" projection_type = "ALL" }
+}
+
+resource "aws_dynamodb_table" "link_mappings" {
+  name = "\${var.name}-link-mappings"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key = "tracking_id"
+  attribute { name = "tracking_id" type = "S" }
+  attribute { name = "campaign_id" type = "S" }
+  attribute { name = "recipient_id" type = "S" }
+  global_secondary_index {
+    name        = "campaign_recipient_index"
+    hash_key    = "campaign_id"
+    range_key   = "recipient_id"
+    projection_type = "ALL"
+  }
+  ttl { attribute_name = "expires_at" enabled = true }
+}`}
+                  </pre>
+                </div>
+
+                <div>
+                  <h4>4) SQS + Retry & DLQ</h4>
+                  <p className="project-description">Queue with DLQ and exponential backoff retry helper.</p>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px' }}>
+{`# infra/modules/queues/main.tf
+resource "aws_sqs_queue" "dlq" {
+  name = "\${var.name}-dlq"
+  message_retention_seconds = 1209600  # 14 days
+}
+
+resource "aws_sqs_queue" "send_queue" {
+  name                       = "\${var.name}-send-queue"
+  visibility_timeout_seconds = 60
+  receive_wait_time_seconds  = 20  # long polling
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.dlq.arn,
+    maxReceiveCount     = 3  # fail faster
+  })
+}`}
+                  </pre>
+                  <pre className="code-block" style={{ whiteSpace: 'pre-wrap', background: '#111', padding: '12px', borderRadius: '8px', marginTop: '8px' }}>
+{`# services/common.py
+def exponential_backoff_retry(func, max_retries=3, base_delay=1.0, max_delay=60.0,
+                              exponential_base=2, jitter=True, retryable_exceptions=(Exception,)):
+    \"\"\"Execute a function with exponential backoff retry logic\"\"\"
+    last_exception = None
+    for attempt in range(max_retries + 1):
+        try:
+            return func()
+        except retryable_exceptions as e:
+            last_exception = e
+            if not is_retryable_error(e) or attempt >= max_retries:
+                raise
+            delay = min(base_delay * (exponential_base ** attempt), max_delay)
+            if jitter:
+                delay = delay * (0.5 + random.random())
+            time.sleep(delay)`}
+                  </pre>
+                </div>
+              </div>
             </div>
           </div>
         </div>
