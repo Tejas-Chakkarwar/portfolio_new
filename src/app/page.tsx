@@ -1740,15 +1740,13 @@ export default function Home() {
     <div className="projects-container" style={{ paddingTop: '0px' }}>
       <div className="project-grid">
         <div className="project-card" id="sentinelArchitecture" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
-          <div
-            className="project-image sliding-image"
-            style={{
-              backgroundImage: `url('${sentinelImages[sentinelImageIndex]}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              minHeight: '320px'
-            }}
-          ></div>
+          <div className="project-image" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0c0c0c' }}>
+            <img
+              src={sentinelImages[sentinelImageIndex]}
+              alt="Sentinel showcase"
+              style={{ width: '100%', maxHeight: '360px', objectFit: 'contain' }}
+            />
+          </div>
           <div className="project-content">
             <div className="project-header">
               <h3 className="project-title">Sentinel</h3>
