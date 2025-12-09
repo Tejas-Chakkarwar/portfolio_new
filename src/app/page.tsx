@@ -311,7 +311,11 @@ export default function Home() {
         <div>
           <h2 className="section-title">Today's Top Picks for recruiter</h2>
           <div className="card-row">
-            <div className="card" onClick={() => document.getElementById('developerHubSection')?.scrollIntoView({ behavior: 'smooth' })} style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Developer Hub</h3><p className="card-subtitle">GitHub activity • Quick links</p></div></div>
+            {selectedProfile === "2" ? (
+              <div className="card" onClick={() => document.getElementById('developerHubSection')?.scrollIntoView({ behavior: 'smooth' })} style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Developer Hub</h3><p className="card-subtitle">GitHub activity • Quick links</p></div></div>
+            ) : (
+              <div className="card" onClick={() => openModal('workPermitModal')} style={{ backgroundImage: "url('/images/work permit.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Work Permit</h3><p className="card-subtitle">F1 Visa • Valid until 2030</p></div></div>
+            )}
             <div className="card" onClick={showSkillsPage} style={{ backgroundImage: "url('/images/Skills.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Skills</h3><p className="card-subtitle">Spring Boot • React • AWS</p></div></div>
             <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
             <div className="card" onClick={showProjectsPage} style={{ backgroundImage: "url('/images/projects.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Projects</h3><p className="card-subtitle">ResuMatch • RouteGuard • SaaS</p></div></div>
@@ -319,56 +323,69 @@ export default function Home() {
           </div>
         </div>
 
-        <div id="developerHubSection" className="projects-container" style={{ paddingTop: '20px' }}>
-          <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
-            <h1>👨‍💻 Developer Hub</h1>
-            <p>Live GitHub stats, quick links, and contributions at a glance.</p>
-          </div>
-          <div className="project-grid">
-            <div className="project-card">
-              <div className="project-content">
-                <div className="project-header">
-                  <h3 className="project-title">GitHub Activity</h3>
+        {selectedProfile === "2" ? (
+          <div id="developerHubSection" className="projects-container" style={{ paddingTop: '20px' }}>
+            <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
+              <h1>👨‍💻 Developer Hub</h1>
+              <p>Live GitHub stats, quick links, and contributions at a glance.</p>
+            </div>
+            <div className="project-grid">
+              <div className="project-card">
+                <div className="project-content">
+                  <div className="project-header">
+                    <h3 className="project-title">GitHub Activity</h3>
+                  </div>
+                  {statsLoading ? (
+                    <p className="project-description">Fetching GitHub stats...</p>
+                  ) : statsError ? (
+                    <p className="project-description">{statsError}</p>
+                  ) : (
+                    <ul className="project-highlights">
+                      <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
+                      <li><strong>Total Commits (2025):</strong> {commits2025 ?? "N/A"}</li>
+                      <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
+                      <li><strong>Active Projects:</strong> 3+</li>
+                    </ul>
+                  )}
                 </div>
-                {statsLoading ? (
-                  <p className="project-description">Fetching GitHub stats...</p>
-                ) : statsError ? (
-                  <p className="project-description">{statsError}</p>
-                ) : (
+              </div>
+
+              <div className="project-card">
+                <div className="project-content">
+                  <div className="project-header">
+                    <h3 className="project-title">Quick Links</h3>
+                  </div>
                   <ul className="project-highlights">
-                    <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
-                    <li><strong>Total Commits (2025):</strong> {commits2025 ?? "N/A"}</li>
-                    <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
-                    <li><strong>Active Projects:</strong> 3+</li>
+                    <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub: github.com/tejas-chakkarwar</a></li>
+                    <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode: leetcode.com/u/tejaschakkarwar/</a></li>
                   </ul>
-                )}
-              </div>
-            </div>
-
-            <div className="project-card">
-              <div className="project-content">
-                <div className="project-header">
-                  <h3 className="project-title">Quick Links</h3>
                 </div>
-                <ul className="project-highlights">
-                  <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub: github.com/tejas-chakkarwar</a></li>
-                  <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode: leetcode.com/u/tejaschakkarwar/</a></li>
-                </ul>
               </div>
-            </div>
 
-            <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
-              <div className="project-content">
-                <div className="project-header">
-                  <h3 className="project-title">Contributions</h3>
-                </div>
-                <div className="project-description" style={{ textAlign: 'center' }}>
-                  <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
+              <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+                <div className="project-content">
+                  <div className="project-header">
+                    <h3 className="project-title">Contributions</h3>
+                  </div>
+                  <div className="project-description" style={{ textAlign: 'center' }}>
+                    <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="continue-section">
+            <h2 className="section-title">Continue Watching for recruiter</h2>
+            <div className="card-row">
+              <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
+              <div className="card continue-card" onClick={showBooksPage} style={{ backgroundImage: "url('/images/Reading.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Reading</h3><p className="card-subtitle">Books That Shaped My Journey</p></div></div>
+              <div className="card continue-card" onClick={() => alert('Blogs section coming soon!')} style={{ backgroundImage: "url('/images/Blog.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Blogs</h3><p className="card-subtitle">Technical Writing</p></div></div>
+              <div className="card continue-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar?tab=repositories', '_blank')} style={{ backgroundImage: "url('/images/github.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">GitHub</h3><p className="card-subtitle">View My Repositories</p></div></div>
+              <div className="card continue-card" onClick={showContactPage} style={{ backgroundImage: "url('/images/contact me.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Contact Me</h3><p className="card-subtitle">Get in Touch</p></div></div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="skills-page" id="skillsPage">
@@ -1528,6 +1545,16 @@ export default function Home() {
           <p className="coffee-message">Or catch up over a coffee ☕ 🤝</p>
         </div>
       </div>
+
+  <div className="modal" id="workPermitModal">
+    <div className="modal-content">
+      <button className="modal-close" onClick={() => closeModal('workPermitModal')}>&times;</button>
+      <h2 className="modal-title"><span>🎓</span>Work Permit</h2>
+      <p className="modal-text">I'm currently pursuing my Master's in Computer Science on an <strong>F1 visa 🇺🇸</strong>, which allows me to work in the U.S. during internships and post-graduation through OPT and CPT programs! 💼</p>
+      <p className="modal-text">My visa is valid until <strong>June 10, 2030 📅</strong>, giving me the opportunity to gain valuable experience and grow my career here. 🌟</p>
+      <p className="modal-contact">For any additional queries, feel free to reach out at <strong>+1 (408) 207-2348</strong></p>
+    </div>
+  </div>
 
     </div>
   );
