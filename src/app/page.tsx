@@ -10,7 +10,7 @@ export default function Home() {
   const [sentinelImageIndex, setSentinelImageIndex] = useState<number>(0);
   const [thinkFlowImageIndex, setThinkFlowImageIndex] = useState<number>(0);
   const [repoCount, setRepoCount] = useState<number | null>(null);
-  const [commits2024, setCommits2024] = useState<number | null>(null);
+  const [commits2025, setCommits2025] = useState<number | null>(null);
   const [statsError, setStatsError] = useState<string | null>(null);
   const [statsLoading, setStatsLoading] = useState<boolean>(false);
   
@@ -210,14 +210,14 @@ export default function Home() {
         setRepoCount(userData.public_repos ?? null);
 
         const commitsRes = await fetch(
-          "https://api.github.com/search/commits?q=author:tejas-chakkarwar+committer-date:2024-01-01..2024-12-31&per_page=1",
+          "https://api.github.com/search/commits?q=author:tejas-chakkarwar+committer-date:2025-01-01..2025-12-31&per_page=1",
           { headers: { Accept: "application/vnd.github.cloak-preview" } }
         );
         if (commitsRes.ok) {
           const commitsData = await commitsRes.json();
-          setCommits2024(commitsData.total_count ?? null);
+          setCommits2025(commitsData.total_count ?? null);
         } else {
-          setCommits2024(null);
+          setCommits2025(null);
         }
       } catch (err) {
         setStatsError("GitHub data unavailable right now");
@@ -311,7 +311,7 @@ export default function Home() {
         <div>
           <h2 className="section-title">Today's Top Picks for recruiter</h2>
           <div className="card-row">
-            <div className="card" onClick={() => openModal('developerHubModal')} style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Developer Hub</h3><p className="card-subtitle">GitHub activity • Quick links</p></div></div>
+            <div className="card" onClick={() => document.getElementById('developerHubSection')?.scrollIntoView({ behavior: 'smooth' })} style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Developer Hub</h3><p className="card-subtitle">GitHub activity • Quick links</p></div></div>
             <div className="card" onClick={showSkillsPage} style={{ backgroundImage: "url('/images/Skills.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Skills</h3><p className="card-subtitle">Spring Boot • React • AWS</p></div></div>
             <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
             <div className="card" onClick={showProjectsPage} style={{ backgroundImage: "url('/images/projects.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Projects</h3><p className="card-subtitle">ResuMatch • RouteGuard • SaaS</p></div></div>
@@ -319,14 +319,54 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="continue-section">
-          <h2 className="section-title">Continue Watching for recruiter</h2>
-          <div className="card-row">
-            <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
-            <div className="card continue-card" onClick={showBooksPage} style={{ backgroundImage: "url('/images/Reading.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Reading</h3><p className="card-subtitle">Books That Shaped My Journey</p></div></div>
-            <div className="card continue-card" onClick={() => alert('Blogs section coming soon!')} style={{ backgroundImage: "url('/images/Blog.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Blogs</h3><p className="card-subtitle">Technical Writing</p></div></div>
-            <div className="card continue-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar?tab=repositories', '_blank')} style={{ backgroundImage: "url('/images/github.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">GitHub</h3><p className="card-subtitle">View My Repositories</p></div></div>
-            <div className="card continue-card" onClick={showContactPage} style={{ backgroundImage: "url('/images/contact me.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Contact Me</h3><p className="card-subtitle">Get in Touch</p></div></div>
+        <div id="developerHubSection" className="projects-container" style={{ paddingTop: '20px' }}>
+          <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
+            <h1>👨‍💻 Developer Hub</h1>
+            <p>Live GitHub stats, quick links, and contributions at a glance.</p>
+          </div>
+          <div className="project-grid">
+            <div className="project-card">
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">GitHub Activity</h3>
+                </div>
+                {statsLoading ? (
+                  <p className="project-description">Fetching GitHub stats...</p>
+                ) : statsError ? (
+                  <p className="project-description">{statsError}</p>
+                ) : (
+                  <ul className="project-highlights">
+                    <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
+                    <li><strong>Total Commits (2025):</strong> {commits2025 ?? "N/A"}</li>
+                    <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
+                    <li><strong>Active Projects:</strong> 3+</li>
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            <div className="project-card">
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">Quick Links</h3>
+                </div>
+                <ul className="project-highlights">
+                  <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub: github.com/tejas-chakkarwar</a></li>
+                  <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode: leetcode.com/u/tejaschakkarwar/</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">Contributions</h3>
+                </div>
+                <div className="project-description" style={{ textAlign: 'center' }}>
+                  <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1489,44 +1529,6 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="modal" id="developerHubModal">
-        <div className="modal-content">
-          <button className="modal-close" onClick={() => closeModal('developerHubModal')}>&times;</button>
-          <h2 className="modal-title"><span>👨‍💻</span>Developer Hub</h2>
-          <p className="modal-text">Real-time GitHub stats and quick links.</p>
-
-          <div className="modal-stat-block">
-            <h3>📊 GitHub Activity</h3>
-            {statsLoading ? (
-              <p className="modal-text">Fetching GitHub stats...</p>
-            ) : statsError ? (
-              <p className="modal-text">{statsError}</p>
-            ) : (
-              <ul className="modal-list">
-                <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
-                <li><strong>Total Commits (2024):</strong> {commits2024 ?? "N/A"}</li>
-                <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
-                <li><strong>Active Projects:</strong> 3+</li>
-              </ul>
-            )}
-          </div>
-
-          <div className="modal-stat-block">
-            <h3>🔗 Quick Links</h3>
-            <ul className="modal-list">
-              <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-              <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode</a></li>
-            </ul>
-          </div>
-
-          <div className="modal-stat-block">
-            <h3>📈 Contributions</h3>
-            <div className="modal-image-wrapper">
-              <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '200px', objectFit: 'contain' }} />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
