@@ -1734,6 +1734,25 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🏗️ Architecture Highlights</h3>
+            </div>
+            <div className="project-description" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ width: '100%', textAlign: 'center' }}>
+                <img src="/images/sentinel-architecture-diagram.png" alt="Sentinel architecture diagram" style={{ width: '100%', maxHeight: '420px', objectFit: 'contain' }} />
+              </div>
+              <ul className="project-highlights">
+                <li>Event-driven with SQS decoupling email send workers from campaign management</li>
+                <li>DynamoDB + GSIs for efficient patterns: campaigns by owner, events by campaign, link mappings by campaign+recipient</li>
+                <li>Lambda concurrency control: <code>maximum_concurrency = 2</code> for send_worker to respect SES rate limits (≈14 emails/sec)</li>
+                <li>Multi-region deployment with DynamoDB Global Tables for active-active durability and low-latency reads</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
