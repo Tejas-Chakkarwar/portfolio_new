@@ -1686,10 +1686,13 @@ export default function Home() {
     <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
       <h1>🚀 Featured Project - Sentinel</h1>
       <p>Serverless, event-driven email marketing platform with real-time analytics and multi-region resilience.</p>
+      <button className="btn btn-info" style={{ marginTop: '12px' }} onClick={() => document.getElementById('sentinelArchitecture')?.scrollIntoView({ behavior: 'smooth' })}>
+        View Architecture
+      </button>
     </div>
     <div className="projects-container" style={{ paddingTop: '0px' }}>
       <div className="project-grid">
-        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+        <div className="project-card" id="sentinelArchitecture" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
           <div className="project-image sliding-image" style={{ backgroundImage: "url('/images/sentinel 2.png')", backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '320px' }}></div>
           <div className="project-content">
             <div className="project-header">
