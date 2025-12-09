@@ -42,6 +42,7 @@ export default function Home() {
       "contactPage",
       "profilePage",
       "developerHubPage",
+      "featuredSentinelPage",
     ].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.classList.remove("active");
@@ -71,6 +72,11 @@ export default function Home() {
   const showSkillsPage = () => {
     hideAllPages();
     document.getElementById("skillsPage")?.classList.add("active");
+    window.scrollTo(0, 0);
+  };
+  const showFeaturedSentinelPage = () => {
+    hideAllPages();
+    document.getElementById("featuredSentinelPage")?.classList.add("active");
     window.scrollTo(0, 0);
   };
   const showExperiencePage = () => {
@@ -271,7 +277,11 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -335,7 +345,11 @@ export default function Home() {
             <div className="card" onClick={showSkillsPage} style={{ backgroundImage: "url('/images/Skills.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Skills</h3><p className="card-subtitle">Spring Boot • React • AWS</p></div></div>
             <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
             <div className="card" onClick={showProjectsPage} style={{ backgroundImage: "url('/images/projects.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Projects</h3><p className="card-subtitle">ResuMatch • RouteGuard • SaaS</p></div></div>
-            <div className="card" onClick={showExtracurricularsPage} style={{ backgroundImage: "url('/images/Extracurriculars.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Extracurriculars</h3><p className="card-subtitle">ACM • Rotary International</p></div></div>
+            {selectedProfile === "2" ? (
+              <div className="card" onClick={showFeaturedSentinelPage} style={{ backgroundImage: "url('/images/sentinel 1.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Featured Project</h3><p className="card-subtitle">Sentinel</p></div></div>
+            ) : (
+              <div className="card" onClick={showExtracurricularsPage} style={{ backgroundImage: "url('/images/Extracurriculars.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Extracurriculars</h3><p className="card-subtitle">ACM • Rotary International</p></div></div>
+            )}
           </div>
         </div>
 
@@ -360,7 +374,11 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -505,7 +523,11 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        {selectedProfile === "2" ? (
+          <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+        ) : (
+          <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -1584,7 +1606,11 @@ export default function Home() {
         <li><a onClick={showExperiencePage}>Professional</a></li>
         <li><a onClick={showSkillsPage}>Skills</a></li>
         <li><a onClick={showProjectsPage}>Projects</a></li>
-        <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        {selectedProfile === "2" ? (
+          <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+        ) : (
+          <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        )}
         <li><a onClick={showContactPage}>Hire Me</a></li>
         <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
       </ul>
@@ -1637,6 +1663,80 @@ export default function Home() {
               <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
             </div>
           </div>
+
+  <div className="projects-page" id="featuredSentinelPage">
+    <button className="back-button" onClick={showBrowsePage}>← Back to Home</button>
+    <nav className="scrolled">
+      <div className="logo">TEJAS CHAKKARWAR</div>
+      <ul className="nav-links">
+        <li><a onClick={showBrowsePage}>Home</a></li>
+        <li><a onClick={showExperiencePage}>Professional</a></li>
+        <li><a onClick={showSkillsPage}>Skills</a></li>
+        <li><a onClick={showProjectsPage}>Projects</a></li>
+        {selectedProfile === "2" ? (
+          <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+        ) : (
+          <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        )}
+        <li><a onClick={showContactPage}>Hire Me</a></li>
+        <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
+      </ul>
+    </nav>
+
+    <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
+      <h1>🚀 Featured Project - Sentinel</h1>
+      <p>Serverless, event-driven email marketing platform with real-time analytics and multi-region resilience.</p>
+    </div>
+    <div className="projects-container" style={{ paddingTop: '0px' }}>
+      <div className="project-grid">
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-image sliding-image" style={{ backgroundImage: "url('/images/sentinel 2.png')", backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '320px' }}></div>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">Sentinel</h3>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <a href="https://dashboard.thesentinel.site/" target="_blank" className="live-link" onClick={(e) => { e.stopPropagation(); }}>
+                  <span>🚀</span> Live Platform
+                </a>
+                <a href="https://github.com/Kushagrabainsla/sentinel" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                  <span>⭐</span> GitHub
+                </a>
+              </div>
+            </div>
+            <div className="project-tech">
+              <span className="tech-tag">AWS Lambda</span>
+              <span className="tech-tag">DynamoDB</span>
+              <span className="tech-tag">SQS</span>
+              <span className="tech-tag">SES</span>
+              <span className="tech-tag">API Gateway</span>
+              <span className="tech-tag">Terraform</span>
+              <span className="tech-tag">Python 3.12</span>
+              <span className="tech-tag">Next.js 16</span>
+              <span className="tech-tag">TypeScript</span>
+              <span className="tech-tag">React 19</span>
+              <span className="tech-tag">Tailwind CSS</span>
+              <span className="tech-tag">Google Gemini</span>
+            </div>
+            <p className="project-description">
+              A production-ready, cloud-native email marketing platform built to solve scalability and reliability challenges. Fully serverless architecture processes high-volume campaigns with real-time analytics and robust failure handling.
+            </p>
+            <ul className="project-highlights">
+              <li>Event-driven pipelines with SQS + Lambda for reliable processing and retries</li>
+              <li>Multi-region DynamoDB Global Tables for low-latency global reads/writes</li>
+              <li>Throughput optimized to 12.5k emails/min with concurrency tuning and backoff</li>
+              <li>Security: HTML sanitization, URL validation, API key auth, least-privilege IAM</li>
+              <li>Observability: structured logging, metrics, and alerting for delivery health</li>
+              <li>Analytics: device/browser/geo insights, link performance tracking</li>
+            </ul>
+            <div className="project-stats">
+              <span className="stat-badge"><strong>Performance:</strong> 12,500 emails/min • 99.9% uptime • &lt;200ms API</span>
+              <span className="stat-badge"><strong>Architecture:</strong> Serverless, event-driven, multi-region</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
         </div>
       </div>
     </div>
