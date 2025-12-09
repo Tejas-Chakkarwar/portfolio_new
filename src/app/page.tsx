@@ -9,6 +9,10 @@ export default function Home() {
   const [codeMedicImageIndex, setCodeMedicImageIndex] = useState<number>(0);
   const [sentinelImageIndex, setSentinelImageIndex] = useState<number>(0);
   const [thinkFlowImageIndex, setThinkFlowImageIndex] = useState<number>(0);
+  const [repoCount, setRepoCount] = useState<number | null>(null);
+  const [commits2024, setCommits2024] = useState<number | null>(null);
+  const [statsError, setStatsError] = useState<string | null>(null);
+  const [statsLoading, setStatsLoading] = useState<boolean>(false);
   
   const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
   const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
@@ -194,6 +198,36 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Fetch GitHub stats for Developer Hub
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        setStatsLoading(true);
+        setStatsError(null);
+        const userRes = await fetch("https://api.github.com/users/tejas-chakkarwar");
+        if (!userRes.ok) throw new Error("GitHub user API failed");
+        const userData = await userRes.json();
+        setRepoCount(userData.public_repos ?? null);
+
+        const commitsRes = await fetch(
+          "https://api.github.com/search/commits?q=author:tejas-chakkarwar+committer-date:2024-01-01..2024-12-31&per_page=1",
+          { headers: { Accept: "application/vnd.github.cloak-preview" } }
+        );
+        if (commitsRes.ok) {
+          const commitsData = await commitsRes.json();
+          setCommits2024(commitsData.total_count ?? null);
+        } else {
+          setCommits2024(null);
+        }
+      } catch (err) {
+        setStatsError("GitHub data unavailable right now");
+      } finally {
+        setStatsLoading(false);
+      }
+    };
+    fetchStats();
+  }, []);
+
   return (
     <div>
       <div className="logo-intro" id="logoIntro">
@@ -277,7 +311,7 @@ export default function Home() {
         <div>
           <h2 className="section-title">Today's Top Picks for recruiter</h2>
           <div className="card-row">
-            <div className="card" onClick={() => openModal('workPermitModal')} style={{ backgroundImage: "url('/images/work permit.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Work Permit</h3><p className="card-subtitle">F1 Visa • Valid until 2030</p></div></div>
+            <div className="card" onClick={() => openModal('developerHubModal')} style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Developer Hub</h3><p className="card-subtitle">GitHub activity • Quick links</p></div></div>
             <div className="card" onClick={showSkillsPage} style={{ backgroundImage: "url('/images/Skills.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Skills</h3><p className="card-subtitle">Spring Boot • React • AWS</p></div></div>
             <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
             <div className="card" onClick={showProjectsPage} style={{ backgroundImage: "url('/images/projects.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Projects</h3><p className="card-subtitle">ResuMatch • RouteGuard • SaaS</p></div></div>
@@ -1455,13 +1489,42 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="modal" id="workPermitModal">
+      <div className="modal" id="developerHubModal">
         <div className="modal-content">
-          <button className="modal-close" onClick={() => closeModal('workPermitModal')}>&times;</button>
-          <h2 className="modal-title"><span>🎓</span>Work Permit</h2>
-          <p className="modal-text">I'm currently pursuing my Master's in Computer Science on an <strong>F1 visa 🇺🇸</strong>, which allows me to work in the U.S. during internships and post-graduation through OPT and CPT programs! 💼</p>
-          <p className="modal-text">My visa is valid until <strong>June 10, 2030 📅</strong>, giving me the opportunity to gain valuable experience and grow my career here. 🌟</p>
-          <p className="modal-contact">For any additional queries, feel free to reach out at <strong>+1 (408) 207-2348</strong></p>
+          <button className="modal-close" onClick={() => closeModal('developerHubModal')}>&times;</button>
+          <h2 className="modal-title"><span>👨‍💻</span>Developer Hub</h2>
+          <p className="modal-text">Real-time GitHub stats and quick links.</p>
+
+          <div className="modal-stat-block">
+            <h3>📊 GitHub Activity</h3>
+            {statsLoading ? (
+              <p className="modal-text">Fetching GitHub stats...</p>
+            ) : statsError ? (
+              <p className="modal-text">{statsError}</p>
+            ) : (
+              <ul className="modal-list">
+                <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
+                <li><strong>Total Commits (2024):</strong> {commits2024 ?? "N/A"}</li>
+                <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
+                <li><strong>Active Projects:</strong> 3+</li>
+              </ul>
+            )}
+          </div>
+
+          <div className="modal-stat-block">
+            <h3>🔗 Quick Links</h3>
+            <ul className="modal-list">
+              <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode</a></li>
+            </ul>
+          </div>
+
+          <div className="modal-stat-block">
+            <h3>📈 Contributions</h3>
+            <div className="modal-image-wrapper">
+              <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '200px', objectFit: 'contain' }} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
