@@ -368,76 +368,132 @@ export default function Home() {
 
         <div className="skills-hero">
           <h1>Skills</h1>
-          <p>Spring Boot • React • AWS</p>
+          {selectedProfile === "2" ? (
+            <p>Backend-focused engineer with production Java/Spring systems and cloud infra.</p>
+          ) : (
+            <p>Spring Boot • React • AWS</p>
+          )}
         </div>
 
-        <div className="skills-category">
-          <h2 className="category-title">Programming Languages</h2>
-          <div className="skills-grid">
-            <div className="skill-item"><div className="skill-item-icon">🔷</div><div className="skill-item-name">Go</div><div className="skill-item-desc">Backend Language</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🐍</div><div className="skill-item-name">Python</div><div className="skill-item-desc">General Purpose Language</div></div>
-            <div className="skill-item"><div className="skill-item-icon">☕</div><div className="skill-item-name">Java</div><div className="skill-item-desc">Object-Oriented Language</div></div>
-            <div className="skill-item"><div className="skill-item-icon">📜</div><div className="skill-item-name">JavaScript</div><div className="skill-item-desc">Frontend & Backend</div></div>
-            <div className="skill-item"><div className="skill-item-icon">⚡</div><div className="skill-item-name">C++</div><div className="skill-item-desc">System Programming</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🎨</div><div className="skill-item-name">HTML/CSS</div><div className="skill-item-desc">Web Technologies</div></div>
-          </div>
-        </div>
+        {selectedProfile === "2" ? (
+          <>
+            <div className="skills-category">
+              <h2 className="category-title">⭐⭐⭐ Expert (Production Experience)</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-name">Java</div><div className="skill-item-desc">Production services</div></div>
+                <div className="skill-item"><div className="skill-item-name">Spring Boot</div><div className="skill-item-desc">Microservices</div></div>
+                <div className="skill-item"><div className="skill-item-name">Microservices</div><div className="skill-item-desc">Event/API first</div></div>
+                <div className="skill-item"><div className="skill-item-name">MySQL</div><div className="skill-item-desc">RDBMS</div></div>
+                <div className="skill-item"><div className="skill-item-name">AWS (EC2, S3, Lambda)</div><div className="skill-item-desc">Infra + serverless</div></div>
+                <div className="skill-item"><div className="skill-item-name">Redis</div><div className="skill-item-desc">Caching</div></div>
+                <div className="skill-item"><div className="skill-item-name">Git</div><div className="skill-item-desc">SCM</div></div>
+              </div>
+            </div>
 
-        <div className="skills-category">
-          <h2 className="category-title">Frameworks & Libraries</h2>
-          <div className="skills-grid">
-            <div className="skill-item"><div className="skill-item-icon">🍃</div><div className="skill-item-name">Spring Boot</div><div className="skill-item-desc">Java Framework</div></div>
-            <div className="skill-item"><div className="skill-item-icon">💾</div><div className="skill-item-name">Spring Data JPA</div><div className="skill-item-desc">Data Access Layer</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🔗</div><div className="skill-item-name">Hibernate</div><div className="skill-item-desc">ORM Framework</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🔌</div><div className="skill-item-name">Spring JDBC</div><div className="skill-item-desc">Database Connectivity</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🌶️</div><div className="skill-item-name">Flask</div><div className="skill-item-desc">Python Web Framework</div></div>
-            <div className="skill-item"><div className="skill-item-icon">⚛️</div><div className="skill-item-name">React</div><div className="skill-item-desc">JavaScript Library</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🖼️</div><div className="skill-item-name">Tkinter</div><div className="skill-item-desc">Python GUI</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🎸</div><div className="skill-item-name">Django</div><div className="skill-item-desc">Python Framework</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🔗</div><div className="skill-item-name">LangChain</div><div className="skill-item-desc">AI Framework</div></div>
-            <div className="skill-item"><div className="skill-item-icon">📊</div><div className="skill-item-name">LangGraph</div><div className="skill-item-desc">AI Workflow Framework</div></div>
-          </div>
-        </div>
+            <div className="skills-category">
+              <h2 className="category-title">⭐⭐ Advanced (Multiple Projects)</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-name">Python</div><div className="skill-item-desc">Data/AI services</div></div>
+                <div className="skill-item"><div className="skill-item-name">React</div><div className="skill-item-desc">Frontend</div></div>
+                <div className="skill-item"><div className="skill-item-name">PostgreSQL</div><div className="skill-item-desc">RDBMS</div></div>
+                <div className="skill-item"><div className="skill-item-name">Docker</div><div className="skill-item-desc">Containers</div></div>
+                <div className="skill-item"><div className="skill-item-name">Terraform</div><div className="skill-item-desc">IaC</div></div>
+                <div className="skill-item"><div className="skill-item-name">LangChain</div><div className="skill-item-desc">LLM apps</div></div>
+                <div className="skill-item"><div className="skill-item-name">REST APIs</div><div className="skill-item-desc">Design & delivery</div></div>
+              </div>
+            </div>
 
-        <div className="skills-category">
-          <h2 className="category-title">Data Stores & Messaging</h2>
-          <div className="skills-grid">
-            <div className="skill-item"><div className="skill-item-icon">🐬</div><div className="skill-item-name">MySQL</div><div className="skill-item-desc">Relational Database</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🐘</div><div className="skill-item-name">PostgreSQL</div><div className="skill-item-desc">Advanced RDBMS</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🍃</div><div className="skill-item-name">MongoDB</div><div className="skill-item-desc">NoSQL Database</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🔍</div><div className="skill-item-name">Elasticsearch</div><div className="skill-item-desc">Search Engine</div></div>
-            <div className="skill-item"><div className="skill-item-icon">⚡</div><div className="skill-item-name">Redis</div><div className="skill-item-desc">In-Memory Cache</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🏛️</div><div className="skill-item-name">Oracle</div><div className="skill-item-desc">Enterprise Database</div></div>
-          </div>
-        </div>
+            <div className="skills-category">
+              <h2 className="category-title">⭐ Intermediate (Learning/Growing)</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-name">Go</div><div className="skill-item-desc">Services</div></div>
+                <div className="skill-item"><div className="skill-item-name">Kubernetes</div><div className="skill-item-desc">Ops</div></div>
+                <div className="skill-item"><div className="skill-item-name">Next.js</div><div className="skill-item-desc">App Router</div></div>
+                <div className="skill-item"><div className="skill-item-name">TypeScript</div><div className="skill-item-desc">Typed frontends</div></div>
+                <div className="skill-item"><div className="skill-item-name">MongoDB</div><div className="skill-item-desc">Document DB</div></div>
+              </div>
+            </div>
 
-        <div className="skills-category">
-          <h2 className="category-title">Cloud & DevOps</h2>
-          <div className="skills-grid">
-            <div className="skill-item"><div className="skill-item-icon">☁️</div><div className="skill-item-name">AWS EC2</div><div className="skill-item-desc">Virtual Servers</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🪣</div><div className="skill-item-name">AWS S3</div><div className="skill-item-desc">Object Storage</div></div>
-            <div className="skill-item"><div className="skill-item-icon">⚡</div><div className="skill-item-name">AWS Lambda</div><div className="skill-item-desc">Serverless Computing</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🌱</div><div className="skill-item-name">Elastic Beanstalk</div><div className="skill-item-desc">PaaS Deployment</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🔐</div><div className="skill-item-name">AWS Cognito</div><div className="skill-item-desc">Authentication</div></div>
-            <div className="skill-item"><div className="skill-item-icon">📧</div><div className="skill-item-name">AWS SES</div><div className="skill-item-desc">Email Service</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🌐</div><div className="skill-item-name">AWS VPC</div><div className="skill-item-desc">Virtual Network</div></div>
-            <div className="skill-item"><div className="skill-item-icon">⚖️</div><div className="skill-item-name">Amazon ELB</div><div className="skill-item-desc">Load Balancing</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🐳</div><div className="skill-item-name">Docker</div><div className="skill-item-desc">Containerization</div></div>
-            <div className="skill-item"><div className="skill-item-icon">☸️</div><div className="skill-item-name">Kubernetes</div><div className="skill-item-desc">Container Orchestration</div></div>
-          </div>
-        </div>
+            <div className="skills-category">
+              <h2 className="category-title">🔬 Currently Exploring</h2>
+              <ul className="project-highlights">
+                <li>Advanced Kubernetes patterns</li>
+                <li>React Server Components</li>
+                <li>Real-time collaborative systems</li>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="skills-category">
+              <h2 className="category-title">Programming Languages</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-icon">🔷</div><div className="skill-item-name">Go</div><div className="skill-item-desc">Backend Language</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🐍</div><div className="skill-item-name">Python</div><div className="skill-item-desc">General Purpose Language</div></div>
+                <div className="skill-item"><div className="skill-item-icon">☕</div><div className="skill-item-name">Java</div><div className="skill-item-desc">Object-Oriented Language</div></div>
+                <div className="skill-item"><div className="skill-item-icon">📜</div><div className="skill-item-name">JavaScript</div><div className="skill-item-desc">Frontend & Backend</div></div>
+                <div className="skill-item"><div className="skill-item-icon">⚡</div><div className="skill-item-name">C++</div><div className="skill-item-desc">System Programming</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🎨</div><div className="skill-item-name">HTML/CSS</div><div className="skill-item-desc">Web Technologies</div></div>
+              </div>
+            </div>
 
-        <div className="skills-category">
-          <h2 className="category-title">Developer Tools</h2>
-          <div className="skills-grid">
-            <div className="skill-item"><div className="skill-item-icon">🔧</div><div className="skill-item-name">Git</div><div className="skill-item-desc">Version Control</div></div>
-            <div className="skill-item"><div className="skill-item-icon">📋</div><div className="skill-item-name">JIRA</div><div className="skill-item-desc">Project Management</div></div>
-            <div className="skill-item"><div className="skill-item-icon">📮</div><div className="skill-item-name">Postman</div><div className="skill-item-desc">API Testing</div></div>
-            <div className="skill-item"><div className="skill-item-icon">💡</div><div className="skill-item-name">IntelliJ</div><div className="skill-item-desc">Java IDE</div></div>
-            <div className="skill-item"><div className="skill-item-icon">💻</div><div className="skill-item-name">VSCode</div><div className="skill-item-desc">Code Editor</div></div>
-            <div className="skill-item"><div className="skill-item-icon">🐧</div><div className="skill-item-name">Unix/Linux</div><div className="skill-item-desc">Operating Systems</div></div>
-          </div>
-        </div>
+            <div className="skills-category">
+              <h2 className="category-title">Frameworks & Libraries</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-icon">🍃</div><div className="skill-item-name">Spring Boot</div><div className="skill-item-desc">Java Framework</div></div>
+                <div className="skill-item"><div className="skill-item-icon">💾</div><div className="skill-item-name">Spring Data JPA</div><div className="skill-item-desc">Data Access Layer</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🔗</div><div className="skill-item-name">Hibernate</div><div className="skill-item-desc">ORM Framework</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🔌</div><div className="skill-item-name">Spring JDBC</div><div className="skill-item-desc">Database Connectivity</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🌶️</div><div className="skill-item-name">Flask</div><div className="skill-item-desc">Python Web Framework</div></div>
+                <div className="skill-item"><div className="skill-item-icon">⚛️</div><div className="skill-item-name">React</div><div className="skill-item-desc">JavaScript Library</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🖼️</div><div className="skill-item-name">Tkinter</div><div className="skill-item-desc">Python GUI</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🎸</div><div className="skill-item-name">Django</div><div className="skill-item-desc">Python Framework</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🔗</div><div className="skill-item-name">LangChain</div><div className="skill-item-desc">AI Framework</div></div>
+                <div className="skill-item"><div className="skill-item-icon">📊</div><div className="skill-item-name">LangGraph</div><div className="skill-item-desc">AI Workflow Framework</div></div>
+              </div>
+            </div>
+
+            <div className="skills-category">
+              <h2 className="category-title">Data Stores & Messaging</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-icon">🐬</div><div className="skill-item-name">MySQL</div><div className="skill-item-desc">Relational Database</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🐘</div><div className="skill-item-name">PostgreSQL</div><div className="skill-item-desc">Advanced RDBMS</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🍃</div><div className="skill-item-name">MongoDB</div><div className="skill-item-desc">NoSQL Database</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🔍</div><div className="skill-item-name">Elasticsearch</div><div className="skill-item-desc">Search Engine</div></div>
+                <div className="skill-item"><div className="skill-item-icon">⚡</div><div className="skill-item-name">Redis</div><div className="skill-item-desc">In-Memory Cache</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🏛️</div><div className="skill-item-name">Oracle</div><div className="skill-item-desc">Enterprise Database</div></div>
+              </div>
+            </div>
+
+            <div className="skills-category">
+              <h2 className="category-title">Cloud & DevOps</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-icon">☁️</div><div className="skill-item-name">AWS EC2</div><div className="skill-item-desc">Virtual Servers</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🪣</div><div className="skill-item-name">AWS S3</div><div className="skill-item-desc">Object Storage</div></div>
+                <div className="skill-item"><div className="skill-item-icon">⚡</div><div className="skill-item-name">AWS Lambda</div><div className="skill-item-desc">Serverless Computing</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🌱</div><div className="skill-item-name">Elastic Beanstalk</div><div className="skill-item-desc">PaaS Deployment</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🔐</div><div className="skill-item-name">AWS Cognito</div><div className="skill-item-desc">Authentication</div></div>
+                <div className="skill-item"><div className="skill-item-icon">📧</div><div className="skill-item-name">AWS SES</div><div className="skill-item-desc">Email Service</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🌐</div><div className="skill-item-name">AWS VPC</div><div className="skill-item-desc">Virtual Network</div></div>
+                <div className="skill-item"><div className="skill-item-icon">⚖️</div><div className="skill-item-name">Amazon ELB</div><div className="skill-item-desc">Load Balancing</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🐳</div><div className="skill-item-name">Docker</div><div className="skill-item-desc">Containerization</div></div>
+                <div className="skill-item"><div className="skill-item-icon">☸️</div><div className="skill-item-name">Kubernetes</div><div className="skill-item-desc">Container Orchestration</div></div>
+              </div>
+            </div>
+
+            <div className="skills-category">
+              <h2 className="category-title">Developer Tools</h2>
+              <div className="skills-grid">
+                <div className="skill-item"><div className="skill-item-icon">🔧</div><div className="skill-item-name">Git</div><div className="skill-item-desc">Version Control</div></div>
+                <div className="skill-item"><div className="skill-item-icon">📋</div><div className="skill-item-name">JIRA</div><div className="skill-item-desc">Project Management</div></div>
+                <div className="skill-item"><div className="skill-item-icon">📮</div><div className="skill-item-name">Postman</div><div className="skill-item-desc">API Testing</div></div>
+                <div className="skill-item"><div className="skill-item-icon">💡</div><div className="skill-item-name">IntelliJ</div><div className="skill-item-desc">Java IDE</div></div>
+                <div className="skill-item"><div className="skill-item-icon">💻</div><div className="skill-item-name">VSCode</div><div className="skill-item-desc">Code Editor</div></div>
+                <div className="skill-item"><div className="skill-item-icon">🐧</div><div className="skill-item-name">Unix/Linux</div><div className="skill-item-desc">Operating Systems</div></div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="experience-page" id="experiencePage">
