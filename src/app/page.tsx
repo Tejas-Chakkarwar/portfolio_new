@@ -13,6 +13,7 @@ export default function Home() {
   const [commits2025, setCommits2025] = useState<number | null>(null);
   const [statsError, setStatsError] = useState<string | null>(null);
   const [statsLoading, setStatsLoading] = useState<boolean>(false);
+  const [showDeveloperHub, setShowDeveloperHub] = useState<boolean>(false);
   
   const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
   const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
@@ -102,6 +103,13 @@ export default function Home() {
     document.getElementById("contactPage")?.classList.add("active");
     window.scrollTo(0, 0);
   };
+
+  // Reset Developer Hub section visibility when switching profiles
+  useEffect(() => {
+    if (selectedProfile !== "2") {
+      setShowDeveloperHub(false);
+    }
+  }, [selectedProfile]);
 
   const showGenreAlbums = (genre: string, e: React.MouseEvent<HTMLButtonElement>) => {
     document.querySelectorAll(".genre-btn").forEach((btn) => btn.classList.remove("active"));
@@ -312,7 +320,19 @@ export default function Home() {
           <h2 className="section-title">Today's Top Picks for recruiter</h2>
           <div className="card-row">
             {selectedProfile === "2" ? (
-              <div className="card" onClick={() => document.getElementById('developerHubSection')?.scrollIntoView({ behavior: 'smooth' })} style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Developer Hub</h3><p className="card-subtitle">GitHub activity • Quick links</p></div></div>
+              <div
+                className="card"
+                onClick={() => {
+                  setShowDeveloperHub(true);
+                  setTimeout(() => document.getElementById('developerHubSection')?.scrollIntoView({ behavior: 'smooth' }), 50);
+                }}
+                style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+              >
+                <div className="card-content">
+                  <h3 className="card-title">Developer Hub</h3>
+                  <p className="card-subtitle">GitHub activity • Quick links</p>
+                </div>
+              </div>
             ) : (
               <div className="card" onClick={() => openModal('workPermitModal')} style={{ backgroundImage: "url('/images/work permit.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Work Permit</h3><p className="card-subtitle">F1 Visa • Valid until 2030</p></div></div>
             )}
@@ -323,7 +343,7 @@ export default function Home() {
           </div>
         </div>
 
-        {selectedProfile === "2" ? (
+        {selectedProfile === "2" && showDeveloperHub && (
           <div id="developerHubSection" className="projects-container" style={{ paddingTop: '20px' }}>
             <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
               <h1>👨‍💻 Developer Hub</h1>
@@ -374,18 +394,18 @@ export default function Home() {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="continue-section">
-            <h2 className="section-title">Continue Watching for recruiter</h2>
-            <div className="card-row">
-              <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
-              <div className="card continue-card" onClick={showBooksPage} style={{ backgroundImage: "url('/images/Reading.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Reading</h3><p className="card-subtitle">Books That Shaped My Journey</p></div></div>
-              <div className="card continue-card" onClick={() => alert('Blogs section coming soon!')} style={{ backgroundImage: "url('/images/Blog.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Blogs</h3><p className="card-subtitle">Technical Writing</p></div></div>
-              <div className="card continue-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar?tab=repositories', '_blank')} style={{ backgroundImage: "url('/images/github.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">GitHub</h3><p className="card-subtitle">View My Repositories</p></div></div>
-              <div className="card continue-card" onClick={showContactPage} style={{ backgroundImage: "url('/images/contact me.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Contact Me</h3><p className="card-subtitle">Get in Touch</p></div></div>
-            </div>
-          </div>
         )}
+
+        <div className="continue-section">
+          <h2 className="section-title">Continue Watching for recruiter</h2>
+          <div className="card-row">
+            <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
+            <div className="card continue-card" onClick={showBooksPage} style={{ backgroundImage: "url('/images/Reading.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Reading</h3><p className="card-subtitle">Books That Shaped My Journey</p></div></div>
+            <div className="card continue-card" onClick={() => alert('Blogs section coming soon!')} style={{ backgroundImage: "url('/images/Blog.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Blogs</h3><p className="card-subtitle">Technical Writing</p></div></div>
+            <div className="card continue-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar?tab=repositories', '_blank')} style={{ backgroundImage: "url('/images/github.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">GitHub</h3><p className="card-subtitle">View My Repositories</p></div></div>
+            <div className="card continue-card" onClick={showContactPage} style={{ backgroundImage: "url('/images/contact me.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Contact Me</h3><p className="card-subtitle">Get in Touch</p></div></div>
+          </div>
+        </div>
       </div>
 
       <div className="skills-page" id="skillsPage">
