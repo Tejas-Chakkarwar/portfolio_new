@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [selectedProfile, setSelectedProfile] = useState<string>("1"); // 1=Recruiter, 2=Developer, 3=Stalker, 4=Adventurer
+  const [selectedProfile, setSelectedProfile] = useState<string>("1"); // 1=Recruiter, 2=Developer, 3=Explorer, 4=Adventurer
   const [liveAgentImageIndex, setLiveAgentImageIndex] = useState<number>(0);
   const [stockMarketImageIndex, setStockMarketImageIndex] = useState<number>(0);
   const [codeMedicImageIndex, setCodeMedicImageIndex] = useState<number>(0);
@@ -212,8 +212,8 @@ export default function Home() {
             <p className="profile-name">Developer</p>
           </div>
           <div className="profile-card" onClick={() => selectProfile("3")}>
-            <img className="profile-avatar" src="/images/Stalker.png" alt="Stalker Profile" />
-            <p className="profile-name">Stalker</p>
+            <img className="profile-avatar" src="/images/Stalker.png" alt="Explorer Profile" />
+            <p className="profile-name">Explorer</p>
           </div>
           <div className="profile-card" onClick={() => selectProfile("4")}>
             <img className="profile-avatar" src="/images/Adventurer.png" alt="Adventurer Profile" />
