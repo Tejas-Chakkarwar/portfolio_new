@@ -75,6 +75,7 @@ export default function Home() {
     window.scrollTo(0, 0);
   };
   const showFeaturedSentinelPage = () => {
+    setSelectedProfile("2");
     hideAllPages();
     document.getElementById("featuredSentinelPage")?.classList.add("active");
     window.scrollTo(0, 0);
