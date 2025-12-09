@@ -13,7 +13,6 @@ export default function Home() {
   const [commits2025, setCommits2025] = useState<number | null>(null);
   const [statsError, setStatsError] = useState<string | null>(null);
   const [statsLoading, setStatsLoading] = useState<boolean>(false);
-  const [showDeveloperHub, setShowDeveloperHub] = useState<boolean>(false);
   
   const liveAgentImages = ["/images/LiveAgent1.jpeg", "/images/LiveAgent2.jpeg", "/images/LiveAgent3.jpeg"];
   const stockMarketImages = ["/images/StockMarket1.png", "/images/StockMarket2.png"];
@@ -42,6 +41,7 @@ export default function Home() {
       "musicPage",
       "contactPage",
       "profilePage",
+      "developerHubPage",
     ].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.classList.remove("active");
@@ -104,12 +104,11 @@ export default function Home() {
     window.scrollTo(0, 0);
   };
 
-  // Reset Developer Hub section visibility when switching profiles
-  useEffect(() => {
-    if (selectedProfile !== "2") {
-      setShowDeveloperHub(false);
-    }
-  }, [selectedProfile]);
+  const showDeveloperHubPage = () => {
+    hideAllPages();
+    document.getElementById("developerHubPage")?.classList.add("active");
+    window.scrollTo(0, 0);
+  };
 
   const showGenreAlbums = (genre: string, e: React.MouseEvent<HTMLButtonElement>) => {
     document.querySelectorAll(".genre-btn").forEach((btn) => btn.classList.remove("active"));
@@ -322,10 +321,7 @@ export default function Home() {
             {selectedProfile === "2" ? (
               <div
                 className="card"
-                onClick={() => {
-                  setShowDeveloperHub(true);
-                  setTimeout(() => document.getElementById('developerHubSection')?.scrollIntoView({ behavior: 'smooth' }), 50);
-                }}
+                onClick={showDeveloperHubPage}
                 style={{ backgroundImage: "url('/images/Developer.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
               >
                 <div className="card-content">
@@ -342,59 +338,6 @@ export default function Home() {
             <div className="card" onClick={showExtracurricularsPage} style={{ backgroundImage: "url('/images/Extracurriculars.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Extracurriculars</h3><p className="card-subtitle">ACM • Rotary International</p></div></div>
           </div>
         </div>
-
-        {selectedProfile === "2" && showDeveloperHub && (
-          <div id="developerHubSection" className="projects-container" style={{ paddingTop: '20px' }}>
-            <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
-              <h1>👨‍💻 Developer Hub</h1>
-              <p>Live GitHub stats, quick links, and contributions at a glance.</p>
-            </div>
-            <div className="project-grid">
-              <div className="project-card">
-                <div className="project-content">
-                  <div className="project-header">
-                    <h3 className="project-title">GitHub Activity</h3>
-                  </div>
-                  {statsLoading ? (
-                    <p className="project-description">Fetching GitHub stats...</p>
-                  ) : statsError ? (
-                    <p className="project-description">{statsError}</p>
-                  ) : (
-                    <ul className="project-highlights">
-                      <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
-                      <li><strong>Total Commits (2025):</strong> {commits2025 ?? "N/A"}</li>
-                      <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
-                      <li><strong>Active Projects:</strong> 3+</li>
-                    </ul>
-                  )}
-                </div>
-              </div>
-
-              <div className="project-card">
-                <div className="project-content">
-                  <div className="project-header">
-                    <h3 className="project-title">Quick Links</h3>
-                  </div>
-                  <ul className="project-highlights">
-                    <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub: github.com/tejas-chakkarwar</a></li>
-                    <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode: leetcode.com/u/tejaschakkarwar/</a></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
-                <div className="project-content">
-                  <div className="project-header">
-                    <h3 className="project-title">Contributions</h3>
-                  </div>
-                  <div className="project-description" style={{ textAlign: 'center' }}>
-                    <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="continue-section">
           <h2 className="section-title">Continue Watching for recruiter</h2>
@@ -1573,6 +1516,73 @@ export default function Home() {
       <p className="modal-text">I'm currently pursuing my Master's in Computer Science on an <strong>F1 visa 🇺🇸</strong>, which allows me to work in the U.S. during internships and post-graduation through OPT and CPT programs! 💼</p>
       <p className="modal-text">My visa is valid until <strong>June 10, 2030 📅</strong>, giving me the opportunity to gain valuable experience and grow my career here. 🌟</p>
       <p className="modal-contact">For any additional queries, feel free to reach out at <strong>+1 (408) 207-2348</strong></p>
+    </div>
+  </div>
+
+  <div className="projects-page" id="developerHubPage">
+    <button className="back-button" onClick={showBrowsePage}>← Back to Home</button>
+    <nav className="scrolled">
+      <div className="logo">TEJAS CHAKKARWAR</div>
+      <ul className="nav-links">
+        <li><a onClick={showBrowsePage}>Home</a></li>
+        <li><a onClick={showExperiencePage}>Professional</a></li>
+        <li><a onClick={showSkillsPage}>Skills</a></li>
+        <li><a onClick={showProjectsPage}>Projects</a></li>
+        <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        <li><a onClick={showContactPage}>Hire Me</a></li>
+        <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
+      </ul>
+    </nav>
+
+    <div className="projects-hero" style={{ marginBottom: '30px', padding: '30px 30px 20px' }}>
+      <h1>👨‍💻 Developer Hub</h1>
+      <p>Live GitHub stats, quick links, and contributions at a glance.</p>
+    </div>
+    <div className="projects-container" style={{ paddingTop: '0px' }}>
+      <div className="project-grid">
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">GitHub Activity</h3>
+            </div>
+            {statsLoading ? (
+              <p className="project-description">Fetching GitHub stats...</p>
+            ) : statsError ? (
+              <p className="project-description">{statsError}</p>
+            ) : (
+              <ul className="project-highlights">
+                <li><strong>Total Repositories:</strong> {repoCount ?? "N/A"}</li>
+                <li><strong>Total Commits (2025):</strong> {commits2025 ?? "N/A"}</li>
+                <li><strong>Languages:</strong> Java, Python, JavaScript, Go</li>
+                <li><strong>Active Projects:</strong> 3+</li>
+              </ul>
+            )}
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">Quick Links</h3>
+            </div>
+            <ul className="project-highlights">
+              <li><a href="https://github.com/tejas-chakkarwar" target="_blank" rel="noopener noreferrer">GitHub: github.com/tejas-chakkarwar</a></li>
+              <li><a href="https://leetcode.com/u/tejaschakkarwar/" target="_blank" rel="noopener noreferrer">LeetCode: leetcode.com/u/tejaschakkarwar/</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">Contributions</h3>
+            </div>
+            <div className="project-description" style={{ textAlign: 'center' }}>
+              <img src="https://ghchart.rshah.org/tejas-chakkarwar" alt="GitHub Contribution Graph" style={{ width: '100%', maxHeight: '220px', objectFit: 'contain' }} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
