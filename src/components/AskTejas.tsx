@@ -143,8 +143,44 @@ export default function AskTejas() {
                   padding: "8px 12px",
                   borderRadius: 8,
                   maxWidth: "80%",
+                  whiteSpace: "pre-wrap",
+                  lineHeight: "1.6",
                 }}>
-                  {m.text}
+                  {m.role === "assistant" ? (
+                    <div style={{
+                      fontFamily: "system-ui, -apple-system, sans-serif",
+                    }}>
+                      {m.text.split('\n').map((line, i) => {
+                        // Format headers
+                        if (line.match(/^##+\s/)) {
+                          return <h3 key={i} style={{ margin: "8px 0 4px 0", fontWeight: "bold", fontSize: "1.1em" }}>{line.replace(/^##+\s/, '')}</h3>;
+                        }
+                        // Format bullet points
+                        if (line.match(/^[-•*]\s/)) {
+                          return <div key={i} style={{ marginLeft: "16px", marginBottom: "4px" }}>• {line.replace(/^[-•*]\s/, '')}</div>;
+                        }
+                        // Format numbered lists
+                        if (line.match(/^\d+\.\s/)) {
+                          return <div key={i} style={{ marginLeft: "16px", marginBottom: "4px" }}>{line}</div>;
+                        }
+                        // Format bold text (basic)
+                        if (line.includes('**')) {
+                          const parts = line.split(/(\*\*.*?\*\*)/g);
+                          return <div key={i} style={{ marginBottom: "4px" }}>
+                            {parts.map((part, j) => 
+                              part.startsWith('**') && part.endsWith('**') 
+                                ? <strong key={j}>{part.slice(2, -2)}</strong>
+                                : part
+                            )}
+                          </div>;
+                        }
+                        // Regular line
+                        return line.trim() ? <div key={i} style={{ marginBottom: "4px" }}>{line}</div> : <br key={i} />;
+                      })}
+                    </div>
+                  ) : (
+                    m.text
+                  )}
                 </div>
               ))}
             </div>

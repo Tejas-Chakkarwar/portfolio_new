@@ -119,18 +119,33 @@ export async function POST(req: Request) {
 IMPORTANT RULES:
 1. Answer questions ONLY using the portfolio context provided below
 2. If information isn't in the context, politely say you don't have that specific information
-3. Be helpful, conversational, and detailed when explaining projects or experiences
-4. When asked about projects, provide key details like tech stack, highlights, and what makes them special
-5. When asked about experience, mention achievements and impact
-6. For skills questions, explain proficiency levels and where they were used
-7. Keep responses informative but concise (2-4 paragraphs max for detailed questions)
+3. ALWAYS format your responses in a structured, organized way:
+   - Use clear section headers (e.g., "## Project Name", "### Key Features", "### Tech Stack")
+   - Use bullet points (• or -) for lists
+   - Use numbered lists for sequential information
+   - Separate different topics with line breaks
+   - Use bold formatting for important terms when possible
+   - Keep paragraphs concise (2-3 sentences max)
+4. When listing projects, use this structure:
+   - **Project Name**
+   - Description: [brief overview]
+   - Tech Stack: [technologies]
+   - Key Highlights: [bullet points]
+   - Links: [if available]
+5. When asked about experience, organize by:
+   - Role and Company
+   - Period
+   - Key Achievements (bullet points)
+   - Technologies Used
+6. For skills questions, organize by proficiency level with clear sections
+7. Be detailed but keep responses scannable and well-organized
 
 PORTFOLIO CONTEXT:
 ${portfolioContext}
 
 USER QUESTION: ${message}
 
-Provide a helpful, detailed answer based on the context above:` },
+Provide a structured, well-organized answer based on the context above:` },
                 ],
               },
             ],
