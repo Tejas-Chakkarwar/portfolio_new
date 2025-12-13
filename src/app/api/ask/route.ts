@@ -128,11 +128,11 @@ CRITICAL RESPONSE RULES:
    
    ## Projects
    
-   • **Project Name** - [One-line description]
-   • **Project Name** - [One-line description]
-   • **Project Name** - [One-line description]
+   • Project Name - One-line description
+   • Project Name - One-line description
+   • Project Name - One-line description
    
-   (NO tech stacks, NO highlights, NO links unless specifically asked)
+   (NO brackets, NO bold formatting, NO tech stacks, NO highlights, NO links unless specifically asked)
 
 3. FOR DETAILED QUERIES:
    Use this structured format:
@@ -152,7 +152,8 @@ CRITICAL RESPONSE RULES:
 4. FORMATTING RULES:
    - Always use ## for main sections
    - Use bullet points (•) for lists
-   - Use **bold** for project/important names
+   - For simple lists: NO bold formatting, NO brackets around descriptions
+   - For detailed responses: Use **bold** for section headers only
    - Keep paragraphs to 1-2 sentences max
    - Add line breaks between sections
    - Be concise - don't repeat information
@@ -191,15 +192,15 @@ Provide a structured, appropriately detailed answer based on the context above:`
     // Fallback: rule-based answer with full context
     const lower = (message || "").toLowerCase();
     if (lower.includes("project") && (lower.includes("list") || lower.includes("what") || lower.includes("show"))) {
-      return NextResponse.json({ reply: `## Projects\n\n${detailedProjects.map((p) => `• **${p.name}** - ${p.description.split('.')[0]}.`).join("\n")}` });
+      return NextResponse.json({ reply: `## Projects\n\n${detailedProjects.map((p) => `• ${p.name} - ${p.description.split('.')[0]}.`).join("\n")}` });
     }
     if (lower.includes("project")) {
-      return NextResponse.json({ reply: `## Projects\n\n${detailedProjects.map((p) => `• **${p.name}** - ${p.description.split('.')[0]}.`).join("\n")}` });
+      return NextResponse.json({ reply: `## Projects\n\n${detailedProjects.map((p) => `• ${p.name} - ${p.description.split('.')[0]}.`).join("\n")}` });
     }
     if (lower.includes("book")) {
-      return NextResponse.json({ reply: `## Books\n\n${books.map((b) => `• **${b.title}** by ${b.author}${b.note ? ` (${b.note})` : ""}`).join("\n")}` });
+      return NextResponse.json({ reply: `## Books\n\n${books.map((b) => `• ${b.title} by ${b.author}${b.note ? ` (${b.note})` : ""}`).join("\n")}` });
     }
-    return NextResponse.json({ reply: `**${profileData.name}** - ${profileData.role}\n\n${profileData.summary}` });
+    return NextResponse.json({ reply: `${profileData.name} - ${profileData.role}\n\n${profileData.summary}` });
   } catch (e: any) {
     return NextResponse.json({ error: e.message || "Unknown error" }, { status: 500 });
   }
