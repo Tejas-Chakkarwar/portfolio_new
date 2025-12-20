@@ -336,7 +336,7 @@ export default function Home() {
         </div>
 
         <div>
-          <h2 className="section-title">Today's Top Picks for recruiter</h2>
+          <h2 className="section-title">{selectedProfile === "2" ? "Today's Top Picks for Developer" : "Today's Top Picks for recruiter"}</h2>
           <div className="card-row">
             {selectedProfile === "2" ? (
               <div
@@ -353,13 +353,14 @@ export default function Home() {
               <div className="card" onClick={() => openModal('workPermitModal')} style={{ backgroundImage: "url('/images/work permit.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Work Permit</h3><p className="card-subtitle">F1 Visa • Valid until 2030</p></div></div>
             )}
             <div className="card" onClick={showSkillsPage} style={{ backgroundImage: "url('/images/Skills.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Skills</h3><p className="card-subtitle">Spring Boot • React • AWS</p></div></div>
-            <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
+            {selectedProfile === "2" ? (
+              <div className="card" onClick={showOngoingProjectPage} style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}><div className="card-content"><h3 className="card-title">🔄 Ongoing Project</h3><p className="card-subtitle">SJSU RideShare</p></div></div>
+            ) : (
+              <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
+            )}
             <div className="card" onClick={showProjectsPage} style={{ backgroundImage: "url('/images/projects.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Projects</h3><p className="card-subtitle">ResuMatch • RouteGuard • SaaS</p></div></div>
             {selectedProfile === "2" ? (
-              <>
-                <div className="card" onClick={showFeaturedSentinelPage} style={{ backgroundImage: "url('/images/sentinel 1.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Featured Project</h3><p className="card-subtitle">Sentinel</p></div></div>
-                <div className="card" onClick={showOngoingProjectPage} style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}><div className="card-content"><h3 className="card-title">🔄 Ongoing Project</h3><p className="card-subtitle">SJSU RideShare</p></div></div>
-              </>
+              <div className="card" onClick={showFeaturedSentinelPage} style={{ backgroundImage: "url('/images/sentinel 1.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Featured Project</h3><p className="card-subtitle">Sentinel</p></div></div>
             ) : (
               <div className="card" onClick={showExtracurricularsPage} style={{ backgroundImage: "url('/images/Extracurriculars.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Extracurriculars</h3><p className="card-subtitle">ACM • Rotary International</p></div></div>
             )}
@@ -367,8 +368,11 @@ export default function Home() {
         </div>
 
         <div className="continue-section">
-          <h2 className="section-title">Continue Watching for recruiter</h2>
+          <h2 className="section-title">{selectedProfile === "2" ? "Continue Watching for Developer" : "Continue Watching for recruiter"}</h2>
           <div className="card-row">
+            {selectedProfile === "2" && (
+              <div className="card continue-card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
+            )}
             {selectedProfile !== "2" && (
               <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
             )}
