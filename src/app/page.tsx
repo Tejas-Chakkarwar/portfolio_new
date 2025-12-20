@@ -357,8 +357,12 @@ export default function Home() {
         <div className="continue-section">
           <h2 className="section-title">Continue Watching for recruiter</h2>
           <div className="card-row">
-            <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
-            <div className="card continue-card" onClick={showBooksPage} style={{ backgroundImage: "url('/images/Reading.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Reading</h3><p className="card-subtitle">Books That Shaped My Journey</p></div></div>
+            {selectedProfile !== "2" && (
+              <div className="card continue-card" onClick={showMusicPage} style={{ backgroundImage: "url('/images/Music.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Music</h3><p className="card-subtitle">Interests & Hobbies</p></div></div>
+            )}
+            {selectedProfile !== "2" && (
+              <div className="card continue-card" onClick={showBooksPage} style={{ backgroundImage: "url('/images/Reading.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Reading</h3><p className="card-subtitle">Books That Shaped My Journey</p></div></div>
+            )}
             <div className="card continue-card" onClick={() => alert('Blogs section coming soon!')} style={{ backgroundImage: "url('/images/Blog.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Blogs</h3><p className="card-subtitle">Technical Writing</p></div></div>
             <div className="card continue-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar?tab=repositories', '_blank')} style={{ backgroundImage: "url('/images/github.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">GitHub</h3><p className="card-subtitle">View My Repositories</p></div></div>
             <div className="card continue-card" onClick={showContactPage} style={{ backgroundImage: "url('/images/contact me.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Contact Me</h3><p className="card-subtitle">Get in Touch</p></div></div>
