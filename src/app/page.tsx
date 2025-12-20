@@ -999,48 +999,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-        <div className="project-card" id="sentinelExtras">
-          <div className="project-content">
-            <div className="project-header">
-              <h3 className="project-title">⚡ Performance Optimizations</h3>
-            </div>
-            <ul className="project-highlights">
-              <li>Exponential backoff with jitter to respect SES rate limits</li>
-              <li>Batch processing for DynamoDB writes (25 items per batch)</li>
-              <li>CloudFront caching for static dashboard assets</li>
-              <li>Connection pooling for database operations</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="project-card">
-          <div className="project-content">
-            <div className="project-header">
-              <h3 className="project-title">🔧 Infrastructure as Code</h3>
-            </div>
-            <ul className="project-highlights">
-              <li>Terraform modules for reproducible deployments</li>
-              <li>CI/CD pipeline with GitHub Actions</li>
-              <li>Blue-green deployment strategy</li>
-              <li>Automated rollback on CloudWatch alarms</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="project-card">
-          <div className="project-content">
-            <div className="project-header">
-              <h3 className="project-title">📊 Monitoring & Observability</h3>
-            </div>
-            <ul className="project-highlights">
-              <li>CloudWatch metrics for Lambda invocations, errors, duration</li>
-              <li>X-Ray tracing for distributed request tracking</li>
-              <li>Custom metrics for email delivery rates</li>
-              <li>SNS alerts for critical failures</li>
-            </ul>
-          </div>
-        </div>
           </div>
         </div>
       </div>
@@ -1983,6 +1941,48 @@ def exponential_backoff_retry(func, max_retries=3, base_delay=1.0, max_delay=60.
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="project-card" id="sentinelExtras">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">⚡ Performance Optimizations</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Exponential backoff with jitter to respect SES rate limits</li>
+              <li>Batch processing for DynamoDB writes (25 items per batch)</li>
+              <li>CloudFront caching for static dashboard assets</li>
+              <li>Connection pooling for database operations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🔧 Infrastructure as Code</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Terraform modules for reproducible deployments</li>
+              <li>CI/CD pipeline with GitHub Actions</li>
+              <li>Blue-green deployment strategy</li>
+              <li>Automated rollback on CloudWatch alarms</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📊 Monitoring & Observability</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>CloudWatch metrics for Lambda invocations, errors, duration</li>
+              <li>X-Ray tracing for distributed request tracking</li>
+              <li>Custom metrics for email delivery rates</li>
+              <li>SNS alerts for critical failures</li>
+            </ul>
           </div>
         </div>
 
