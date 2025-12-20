@@ -354,7 +354,7 @@ export default function Home() {
             )}
             <div className="card" onClick={showSkillsPage} style={{ backgroundImage: "url('/images/Skills.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Skills</h3><p className="card-subtitle">Spring Boot • React • AWS</p></div></div>
             {selectedProfile === "2" ? (
-              <div className="card" onClick={showOngoingProjectPage} style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}><div className="card-content"><h3 className="card-title">🔄 Ongoing Project</h3><p className="card-subtitle">SJSU RideShare</p></div></div>
+              <div className="card" onClick={showOngoingProjectPage} style={{ backgroundImage: "url('/images/Rideshare.webp')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">🔄 Ongoing Project</h3><p className="card-subtitle">SJSU RideShare</p></div></div>
             ) : (
               <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
             )}
@@ -381,6 +381,7 @@ export default function Home() {
             )}
             <div className="card continue-card" onClick={() => alert('Blogs section coming soon!')} style={{ backgroundImage: "url('/images/Blog.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Blogs</h3><p className="card-subtitle">Technical Writing</p></div></div>
             <div className="card continue-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar?tab=repositories', '_blank')} style={{ backgroundImage: "url('/images/github.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">GitHub</h3><p className="card-subtitle">View My Repositories</p></div></div>
+            <div className="card continue-card" onClick={() => window.open('https://leetcode.com/u/tejaschakkarwar/', '_blank')} style={{ backgroundImage: "url('/images/LeetCode.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">LeetCode</h3><p className="card-subtitle">Coding Challenges</p></div></div>
             <div className="card continue-card" onClick={showContactPage} style={{ backgroundImage: "url('/images/contact me.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Contact Me</h3><p className="card-subtitle">Get in Touch</p></div></div>
           </div>
         </div>
