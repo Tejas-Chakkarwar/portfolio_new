@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# portfolio project showcase (ongoing project)
+public/Portfolio_Project_Showcase.md

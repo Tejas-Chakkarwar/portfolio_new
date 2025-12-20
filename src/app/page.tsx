@@ -43,6 +43,7 @@ export default function Home() {
       "profilePage",
       "developerHubPage",
       "featuredSentinelPage",
+      "ongoingProjectPage",
     ].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.classList.remove("active");
@@ -78,6 +79,11 @@ export default function Home() {
     setSelectedProfile("2");
     hideAllPages();
     document.getElementById("featuredSentinelPage")?.classList.add("active");
+    window.scrollTo(0, 0);
+  };
+  const showOngoingProjectPage = () => {
+    hideAllPages();
+    document.getElementById("ongoingProjectPage")?.classList.add("active");
     window.scrollTo(0, 0);
   };
   const showExperiencePage = () => {
@@ -279,7 +285,10 @@ export default function Home() {
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
             {selectedProfile === "2" ? (
-              <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
             ) : (
               <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
             )}
@@ -347,7 +356,10 @@ export default function Home() {
             <div className="card" onClick={showExperiencePage} style={{ backgroundImage: "url('/images/Experience.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Experience</h3><p className="card-subtitle">Accelya • Hitachi Vantara</p></div></div>
             <div className="card" onClick={showProjectsPage} style={{ backgroundImage: "url('/images/projects.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Projects</h3><p className="card-subtitle">ResuMatch • RouteGuard • SaaS</p></div></div>
             {selectedProfile === "2" ? (
-              <div className="card" onClick={showFeaturedSentinelPage} style={{ backgroundImage: "url('/images/sentinel 1.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Featured Project</h3><p className="card-subtitle">Sentinel</p></div></div>
+              <>
+                <div className="card" onClick={showFeaturedSentinelPage} style={{ backgroundImage: "url('/images/sentinel 1.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Featured Project</h3><p className="card-subtitle">Sentinel</p></div></div>
+                <div className="card" onClick={showOngoingProjectPage} style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}><div className="card-content"><h3 className="card-title">🔄 Ongoing Project</h3><p className="card-subtitle">SJSU RideShare</p></div></div>
+              </>
             ) : (
               <div className="card" onClick={showExtracurricularsPage} style={{ backgroundImage: "url('/images/Extracurriculars.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}><div className="card-content"><h3 className="card-title">Extracurriculars</h3><p className="card-subtitle">ACM • Rotary International</p></div></div>
             )}
@@ -380,7 +392,10 @@ export default function Home() {
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
             {selectedProfile === "2" ? (
-              <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
             ) : (
               <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
             )}
@@ -1986,6 +2001,533 @@ def exponential_backoff_retry(func, max_retries=3, base_delay=1.0, max_delay=60.
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <div className="projects-page" id="ongoingProjectPage">
+    <button className="back-button" onClick={showBrowsePage}>← Back to Home</button>
+    <nav className="scrolled">
+      <div className="logo">TEJAS CHAKKARWAR</div>
+      <ul className="nav-links">
+        <li><a onClick={showBrowsePage}>Home</a></li>
+        <li><a onClick={showExperiencePage}>Professional</a></li>
+        <li><a onClick={showSkillsPage}>Skills</a></li>
+        <li><a onClick={showProjectsPage}>Projects</a></li>
+        {selectedProfile === "2" ? (
+          <>
+            <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+            <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+          </>
+        ) : (
+          <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+        )}
+        <li><a onClick={showContactPage}>Hire Me</a></li>
+        <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
+      </ul>
+    </nav>
+
+    <div className="projects-hero" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', marginBottom: '30px', padding: '30px 30px 20px' }}>
+      <h1>🔄 SJSU RideShare - Ongoing Project</h1>
+      <p>Production-grade, scalable carpooling platform for San José State University students, faculty, and staff.</p>
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '12px' }}>
+        <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 12px', borderRadius: '6px', fontSize: '14px' }}>🔄 Ongoing Development</span>
+        <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 12px', borderRadius: '6px', fontSize: '14px' }}>🚀 Production-Grade</span>
+        <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 12px', borderRadius: '6px', fontSize: '14px' }}>📱 Full-Stack</span>
+      </div>
+    </div>
+
+    <div className="projects-container" style={{ paddingTop: '0px' }}>
+      {/* Project Overview & Metrics */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📊 Project Overview</h3>
+            </div>
+            <p className="project-description">
+              SJSU RideShare is a production-grade, scalable carpooling platform designed exclusively for San José State University students, faculty, and staff. The platform enables secure ride-sharing within the campus community, reducing transportation costs and carbon footprint while fostering connections among students.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginTop: '20px' }}>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#667eea', marginBottom: '5px' }}>5,000+</div>
+                <div style={{ fontSize: '14px', color: '#999' }}>Target Users (Phase 1)</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#667eea', marginBottom: '5px' }}>500+</div>
+                <div style={{ fontSize: '14px', color: '#999' }}>Daily Rides</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#667eea', marginBottom: '5px' }}>$15-30</div>
+                <div style={{ fontSize: '14px', color: '#999' }}>Cost Savings/Ride</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#667eea', marginBottom: '5px' }}>~200t</div>
+                <div style={{ fontSize: '14px', color: '#999' }}>CO2 Reduction/Year</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* System Architecture */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🏗️ System Architecture</h3>
+            </div>
+            <div className="project-description" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div>
+                <h4 style={{ color: '#667eea', marginBottom: '12px', fontSize: '18px' }}>Architecture Layers</h4>
+                <div style={{ background: '#0c0c0c', padding: '20px', borderRadius: '8px', fontFamily: 'monospace', fontSize: '13px', lineHeight: '1.8' }}>
+                  <div style={{ color: '#667eea' }}>┌─ Client Layer</div>
+                  <div style={{ marginLeft: '20px', color: '#fff' }}>React Native Mobile App (iOS + Android)</div>
+                  <div style={{ marginLeft: '20px', color: '#999' }}>• Expo Framework • Real-time Location • Stripe Payments</div>
+                  <div style={{ color: '#667eea', marginTop: '15px' }}>├─ API Gateway Layer</div>
+                  <div style={{ marginLeft: '20px', color: '#fff' }}>Kong API Gateway / AWS API Gateway</div>
+                  <div style={{ marginLeft: '20px', color: '#999' }}>• Rate Limiting (100 req/min) • JWT Auth • Load Balancing</div>
+                  <div style={{ color: '#667eea', marginTop: '15px' }}>├─ Microservices Layer</div>
+                  <div style={{ marginLeft: '20px', color: '#fff' }}>5 Services: User, Ride, Booking, Notification, Tracking</div>
+                  <div style={{ marginLeft: '20px', color: '#999' }}>• FastAPI (Python 3.11) • REST APIs • Async/Await</div>
+                  <div style={{ color: '#667eea', marginTop: '15px' }}>├─ Data Layer</div>
+                  <div style={{ marginLeft: '20px', color: '#fff' }}>PostgreSQL (Primary) + Redis Cluster (Cache + PubSub)</div>
+                  <div style={{ marginLeft: '20px', color: '#999' }}>• Master-Replica Setup • 6 Redis Nodes (3 master, 3 replica)</div>
+                  <div style={{ color: '#667eea', marginTop: '15px' }}>└─ External Services</div>
+                  <div style={{ marginLeft: '20px', color: '#999' }}>Google Maps • Stripe • SendGrid • Firebase FCM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Microservices Breakdown */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">👤 User Service (8001)</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Authentication & Authorization (JWT)</li>
+              <li>User Profile Management</li>
+              <li>Driver License Verification</li>
+              <li>Rating System</li>
+              <li>SJSU Email Validation (@sjsu.edu)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🚗 Ride Service (8002)</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Ride CRUD Operations</li>
+              <li>Advanced Search (proximity, time, price)</li>
+              <li>Google Maps Integration</li>
+              <li>Route Optimization</li>
+              <li>Recurring Rides</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📅 Booking Service (8003)</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Booking State Machine (Pending → Approved → Completed)</li>
+              <li>Seat Reservation with Pessimistic Locking</li>
+              <li>Payment Processing (Stripe)</li>
+              <li>Cancellation Policy Engine</li>
+              <li>Refund Management</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🔔 Notification Service (8004)</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Multi-channel Notifications (Email, Push, SMS)</li>
+              <li>Email Templates (SendGrid)</li>
+              <li>Firebase Cloud Messaging</li>
+              <li>Notification Preferences</li>
+              <li>Event-driven Architecture</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📍 Tracking Service (8005)</h3>
+            </div>
+            <ul className="project-highlights">
+              <li>Real-time WebSocket Connections</li>
+              <li>Location Broadcasting (Redis PubSub)</li>
+              <li>Geofencing (500m approaching, 100m arrived)</li>
+              <li>Dynamic ETA Calculation</li>
+              <li>Route History Storage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Smart Matching Algorithm */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🎯 Smart Matching Algorithm</h3>
+            </div>
+            <p className="project-description">
+              Multi-Factor Scoring System (0-100 points) that intelligently matches passengers with drivers based on route compatibility, time match, price competitiveness, driver reputation, and user preferences.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px', marginTop: '20px' }}>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontWeight: 'bold', color: '#667eea', marginBottom: '8px' }}>Route Compatibility (40 pts)</div>
+                <div style={{ fontSize: '13px', color: '#999' }}>Detour distance, direction alignment</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontWeight: 'bold', color: '#667eea', marginBottom: '8px' }}>Time Match (20 pts)</div>
+                <div style={{ fontSize: '13px', color: '#999' }}>Exact match = 20, ±30min = 15</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontWeight: 'bold', color: '#667eea', marginBottom: '8px' }}>Price Competitiveness (15 pts)</div>
+                <div style={{ fontSize: '13px', color: '#999' }}>Free = 15, $5 = 12, $10 = 8</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontWeight: 'bold', color: '#667eea', marginBottom: '8px' }}>Driver Reputation (15 pts)</div>
+                <div style={{ fontSize: '13px', color: '#999' }}>5.0 rating = 15, 4.5+ = 12</div>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '15px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <div style={{ fontWeight: 'bold', color: '#667eea', marginBottom: '8px' }}>Preference Match (10 pts)</div>
+                <div style={{ fontSize: '13px', color: '#999' }}>Music, AC, Stops, Pets, Smoking</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Technology Stack */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">⚙️ Backend Stack</h3>
+            </div>
+            <div className="project-tech" style={{ marginTop: '15px' }}>
+              <span className="tech-tag">FastAPI</span>
+              <span className="tech-tag">Python 3.11</span>
+              <span className="tech-tag">PostgreSQL 15</span>
+              <span className="tech-tag">Redis 7.0</span>
+              <span className="tech-tag">SQLAlchemy 2.0</span>
+              <span className="tech-tag">Celery</span>
+              <span className="tech-tag">WebSocket</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📱 Frontend Stack</h3>
+            </div>
+            <div className="project-tech" style={{ marginTop: '15px' }}>
+              <span className="tech-tag">React Native</span>
+              <span className="tech-tag">Expo</span>
+              <span className="tech-tag">React Navigation</span>
+              <span className="tech-tag">React Native Maps</span>
+              <span className="tech-tag">Stripe SDK</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">☁️ Infrastructure</h3>
+            </div>
+            <div className="project-tech" style={{ marginTop: '15px' }}>
+              <span className="tech-tag">Docker</span>
+              <span className="tech-tag">Kubernetes</span>
+              <span className="tech-tag">AWS</span>
+              <span className="tech-tag">ECS/EKS</span>
+              <span className="tech-tag">RDS</span>
+              <span className="tech-tag">ElastiCache</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🔌 External APIs</h3>
+            </div>
+            <div className="project-tech" style={{ marginTop: '15px' }}>
+              <span className="tech-tag">Google Maps</span>
+              <span className="tech-tag">Stripe</span>
+              <span className="tech-tag">SendGrid</span>
+              <span className="tech-tag">Firebase FCM</span>
+              <span className="tech-tag">Twilio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scalability Strategy */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📈 Scalability & Infrastructure Strategy</h3>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>Phase 1: MVP (Month 0-2)</h4>
+                <div style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Target: 500 users, 50 rides/day</div>
+                <ul style={{ fontSize: '13px', color: '#e5e5e5', lineHeight: '1.8', paddingLeft: '20px' }}>
+                  <li>Railway / Render (PaaS)</li>
+                  <li>Managed PostgreSQL (1GB RAM)</li>
+                  <li>Upstash Redis (free tier)</li>
+                  <li>Sentry free tier</li>
+                </ul>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>Phase 2: Growth (Month 3-4)</h4>
+                <div style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Target: 5,000 users, 500 rides/day</div>
+                <ul style={{ fontSize: '13px', color: '#e5e5e5', lineHeight: '1.8', paddingLeft: '20px' }}>
+                  <li>Migration to AWS</li>
+                  <li>ECS Fargate containers</li>
+                  <li>RDS PostgreSQL (db.t3.medium)</li>
+                  <li>ElastiCache Redis</li>
+                  <li>Auto-scaling (2-10 containers)</li>
+                </ul>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>Phase 3: Scale (Month 5-6)</h4>
+                <div style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Target: 20,000 users, 2,000 rides/day</div>
+                <ul style={{ fontSize: '13px', color: '#e5e5e5', lineHeight: '1.8', paddingLeft: '20px' }}>
+                  <li>Kubernetes (EKS)</li>
+                  <li>PostgreSQL Master-Replica</li>
+                  <li>Redis Cluster (6 nodes)</li>
+                  <li>CloudFront CDN</li>
+                  <li>99.9% uptime target</li>
+                </ul>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>Phase 4: Multi-Region (Month 7-8)</h4>
+                <div style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Target: 100,000+ users</div>
+                <ul style={{ fontSize: '13px', color: '#e5e5e5', lineHeight: '1.8', paddingLeft: '20px' }}>
+                  <li>Active-Active multi-region</li>
+                  <li>Route 53 Geolocation</li>
+                  <li>Cross-region replication</li>
+                  <li>Kafka event streaming</li>
+                  <li>99.95% uptime target</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Key Features */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">✨ Key Features & Technical Highlights</h3>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+              <div>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>🔒 Security</h4>
+                <ul className="project-highlights" style={{ fontSize: '14px' }}>
+                  <li>JWT Tokens (RS256 algorithm)</li>
+                  <li>Token Rotation & Refresh</li>
+                  <li>SJSU Email Verification</li>
+                  <li>Encryption at Rest (AES-256)</li>
+                  <li>TLS 1.3 in Transit</li>
+                  <li>PCI Compliance via Stripe</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>⚡ Performance</h4>
+                <ul className="project-highlights" style={{ fontSize: '14px' }}>
+                  <li>Multi-level Caching (L1/L2/L3)</li>
+                  <li>Database Partitioning</li>
+                  <li>Connection Pooling</li>
+                  <li>Asynchronous Processing (Celery)</li>
+                  <li>API Rate Limiting (100 req/min)</li>
+                  <li>Response Compression (Gzip)</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>📊 Observability</h4>
+                <ul className="project-highlights" style={{ fontSize: '14px' }}>
+                  <li>Prometheus + Grafana</li>
+                  <li>ELK Stack Logging</li>
+                  <li>Sentry Error Tracking</li>
+                  <li>CloudWatch Metrics</li>
+                  <li>X-Ray Tracing</li>
+                  <li>Custom Business Metrics</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style={{ color: '#667eea', marginBottom: '12px' }}>🧪 Testing</h4>
+                <ul className="project-highlights" style={{ fontSize: '14px' }}>
+                  <li>80%+ Test Coverage Target</li>
+                  <li>Unit Tests (pytest)</li>
+                  <li>Integration Tests</li>
+                  <li>E2E Tests (Detox)</li>
+                  <li>Load Testing (Locust/k6)</li>
+                  <li>Security Testing (OWASP)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Payment Flow */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">💳 Payment Flow (Escrow Pattern)</h3>
+            </div>
+            <div style={{ background: '#0c0c0c', padding: '20px', borderRadius: '8px', fontFamily: 'monospace', fontSize: '13px', lineHeight: '2', marginTop: '15px' }}>
+              <div style={{ color: '#667eea' }}>Booking Creation → Payment Intent (Authorization)</div>
+              <div style={{ color: '#999', marginLeft: '20px' }}>└─ Funds held on card (7 days max)</div>
+              <div style={{ color: '#667eea', marginTop: '15px' }}>Driver Approval → Payment Captured</div>
+              <div style={{ color: '#999', marginLeft: '20px' }}>└─ 90% to driver escrow, 10% platform fee</div>
+              <div style={{ color: '#667eea', marginTop: '15px' }}>Ride Completion → Transfer to Driver</div>
+              <div style={{ color: '#999', marginLeft: '20px' }}>└─ Payout to bank (2-3 days via Stripe Connect)</div>
+              <div style={{ color: '#667eea', marginTop: '15px' }}>Cancellation → Refund Calculation</div>
+              <div style={{ color: '#999', marginLeft: '20px' }}>└─ &gt;24hr: 100% | 2-24hr: 50% | &lt;2hr: 0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Real-Time Architecture */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">⚡ Real-Time Architecture</h3>
+            </div>
+            <p className="project-description">
+              WebSocket-based real-time location tracking with Redis PubSub for horizontal scaling. Updates every 5 seconds with location, speed, bearing, ETA, and geofence events.
+            </p>
+            <ul className="project-highlights">
+              <li>WebSocket connections with sticky sessions (Kubernetes)</li>
+              <li>Redis PubSub for broadcasting to all passengers</li>
+              <li>Connection pool management</li>
+              <li>Reconnection with exponential backoff</li>
+              <li>Geofencing: 500m approaching, 100m arrived notifications</li>
+              <li>Dynamic ETA calculation based on real-time traffic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Database Architecture */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🗄️ PostgreSQL Schema</h3>
+            </div>
+            <ul className="project-highlights" style={{ fontSize: '14px' }}>
+              <li><strong>Users:</strong> Indexed by email, phone, stripe_customer_id</li>
+              <li><strong>Rides:</strong> GiST index on origin_coords, partitioned by departure_time</li>
+              <li><strong>Bookings:</strong> Indexed by ride_id, passenger_id, status</li>
+              <li><strong>Partitioning:</strong> Time-based (monthly/quarterly)</li>
+              <li><strong>Row-level Locking:</strong> SELECT FOR UPDATE for seat reservation</li>
+              <li><strong>Connection Pool:</strong> 50 connections, PgBouncer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="project-card">
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">⚡ Redis Architecture</h3>
+            </div>
+            <ul className="project-highlights" style={{ fontSize: '14px' }}>
+              <li><strong>Cluster:</strong> 6 nodes (3 master, 3 replica)</li>
+              <li><strong>Sentinel:</strong> Automatic failover</li>
+              <li><strong>Session Tokens:</strong> TTL 24h</li>
+              <li><strong>Geocoding Cache:</strong> TTL 30 days</li>
+              <li><strong>Route Cache:</strong> TTL 1 hour</li>
+              <li><strong>Location Data:</strong> TTL 24h, PubSub for real-time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Key Learnings */}
+      <div className="project-grid" style={{ marginBottom: '40px' }}>
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">🎓 Key Learnings & Technical Challenges</h3>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '10px' }}>Microservices Complexity</h4>
+                <p style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Challenge: Managing inter-service communication and data consistency</p>
+                <p style={{ fontSize: '13px', color: '#e5e5e5' }}>Solution: Event-driven architecture with Redis PubSub, transaction boundaries, saga pattern</p>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '10px' }}>Real-time Scalability</h4>
+                <p style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Challenge: WebSocket connections don't scale horizontally</p>
+                <p style={{ fontSize: '13px', color: '#e5e5e5' }}>Solution: Redis PubSub broadcasting, sticky sessions, connection state management</p>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '10px' }}>Payment Security</h4>
+                <p style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Challenge: PCI compliance, refunds and disputes</p>
+                <p style={{ fontSize: '13px', color: '#e5e5e5' }}>Solution: Stripe for payment handling, escrow pattern, automated refund calculation</p>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '10px' }}>Geospatial Performance</h4>
+                <p style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Challenge: Fast proximity search with millions of coordinates</p>
+                <p style={{ fontSize: '13px', color: '#e5e5e5' }}>Solution: PostGIS with GiST indexing, Redis geospatial commands, aggressive caching</p>
+              </div>
+              <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
+                <h4 style={{ color: '#667eea', marginBottom: '10px' }}>Race Conditions</h4>
+                <p style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Challenge: Multiple passengers booking last seat simultaneously</p>
+                <p style={{ fontSize: '13px', color: '#e5e5e5' }}>Solution: Pessimistic locking (SELECT FOR UPDATE), atomic operations, idempotent APIs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Project Stats */}
+      <div className="project-grid">
+        <div className="project-card" style={{ gridColumn: 'span 2', maxWidth: '100%' }}>
+          <div className="project-content">
+            <div className="project-header">
+              <h3 className="project-title">📊 Project Statistics</h3>
+            </div>
+            <div className="project-stats" style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', marginTop: '15px' }}>
+              <span className="stat-badge"><strong>Codebase:</strong> ~15,000+ lines</span>
+              <span className="stat-badge"><strong>Tech Stack:</strong> 15+ technologies</span>
+              <span className="stat-badge"><strong>Microservices:</strong> 5 services</span>
+              <span className="stat-badge"><strong>Test Coverage:</strong> 80%+ target</span>
+              <span className="stat-badge"><strong>Market Size:</strong> 35,000+ SJSU students</span>
+              <span className="stat-badge"><strong>Revenue Potential:</strong> $50K+ ARR</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
