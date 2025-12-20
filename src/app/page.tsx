@@ -642,7 +642,14 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -1032,7 +1039,14 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -1190,7 +1204,14 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -1287,7 +1308,14 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
@@ -1575,7 +1603,14 @@ export default function Home() {
             <li><a onClick={showExperiencePage}>Professional</a></li>
             <li><a onClick={showSkillsPage}>Skills</a></li>
             <li><a onClick={showProjectsPage}>Projects</a></li>
-            <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            {selectedProfile === "2" ? (
+              <>
+                <li><a onClick={showFeaturedSentinelPage}>Featured Project</a></li>
+                <li><a onClick={showOngoingProjectPage}>Ongoing Project</a></li>
+              </>
+            ) : (
+              <li><a onClick={showExtracurricularsPage}>Extracurriculars</a></li>
+            )}
             <li><a onClick={showContactPage}>Hire Me</a></li>
             <img className="profile-icon" src={getProfileImage()} alt="Profile" onClick={backToProfiles} style={{ cursor: 'pointer' }} />
           </ul>
