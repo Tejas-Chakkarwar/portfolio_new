@@ -2289,7 +2289,7 @@ def exponential_backoff_retry(func, max_retries=3, base_delay=1.0, max_delay=60.
             <div className="project-header">
               <h3 className="project-title">📈 Scalability & Infrastructure Strategy</h3>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginTop: '20px' }}>
               <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '20px', borderRadius: '8px', border: '1px solid rgba(102, 126, 234, 0.3)' }}>
                 <h4 style={{ color: '#667eea', marginBottom: '12px' }}>Phase 1: MVP (Month 0-2)</h4>
                 <div style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Target: 500 users, 50 rides/day</div>
@@ -2345,7 +2345,7 @@ def exponential_backoff_retry(func, max_retries=3, base_delay=1.0, max_delay=60.
             <div className="project-header">
               <h3 className="project-title">✨ Key Features & Technical Highlights</h3>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginTop: '20px' }}>
               <div>
                 <h4 style={{ color: '#667eea', marginBottom: '12px' }}>🔒 Security</h4>
                 <ul className="project-highlights" style={{ fontSize: '14px' }}>
