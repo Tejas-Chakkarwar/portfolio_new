@@ -747,6 +747,41 @@ export default function Home() {
               </div>
             </div>
 
+            <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/DPI', '_blank')}>
+              <div className="project-image">🔍</div>
+              <div className="project-content">
+                <div className="project-header">
+                  <h3 className="project-title">Deep Packet Inspection Engine</h3>
+                  <a href="https://github.com/Tejas-Chakkarwar/DPI" target="_blank" className="github-link" onClick={(e) => { e.stopPropagation(); }}>
+                    <span>⭐</span> GitHub
+                  </a>
+                </div>
+                <div className="project-tech">
+                  <span className="tech-tag">Java 17</span>
+                  <span className="tech-tag">Pcap4J</span>
+                  <span className="tech-tag">ExecutorService</span>
+                  <span className="tech-tag">ByteBuffer</span>
+                  <span className="tech-tag">ConcurrentHashMap</span>
+                  <span className="tech-tag">Maven</span>
+                  <span className="tech-tag">JUnit 5</span>
+                </div>
+                <p className="project-description">
+                  A production-grade network traffic analyzer that captures live packets, classifies encrypted flows by application (YouTube, Netflix, Facebook, etc.), and blocks traffic in real time using configurable rules at high throughput.
+                </p>
+                <ul className="project-highlights">
+                  <li>Multi-threaded capture pipeline: LoadBalancer distributes packets to FastPath workers using consistent hashing for flow affinity (per-flow thread ownership)</li>
+                  <li>Backpressure: `BlockingQueue` between pipeline stages prevents silent packet drops when workers can&apos;t keep up</li>
+                  <li>Low-overhead hot path: lock-free counters with `AtomicLong` instead of synchronized blocks</li>
+                  <li>TLS SNI extraction: `ByteBuffer` parser reads TLS ClientHello and extracts SNI to classify apps during encrypted handshakes</li>
+                  <li>Runtime rule engine: `ConcurrentHashMap`-backed flow tables support blocking by IP, domain, or application name without restarting capture</li>
+                </ul>
+                <div className="project-stats">
+                  <span className="stat-badge"><strong>Performance:</strong> 200K+ pkt/s • Sub-1ms p95 latency</span>
+                  <span className="stat-badge"><strong>Coverage:</strong> 90%+ JUnit 5 tests</span>
+                </div>
+              </div>
+            </div>
+
             <div className="project-card" onClick={() => window.open('https://github.com/Tejas-Chakkarwar/CodeMedic', '_blank')}>
               <div className="project-image sliding-image" key={`codemedic-${codeMedicImageIndex}`} style={{ backgroundImage: `url('${codeMedicImages[codeMedicImageIndex]}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               <div className="project-content">
